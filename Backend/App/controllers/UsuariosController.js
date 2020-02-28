@@ -1,6 +1,6 @@
 module.exports = {
 
-    async getUsers(req, res) {                                          // Testado: OK
+    async getUsuarios(req, res) {                                          // Testado: OK
         console.log('chegou em "Controllers>Usuarios.getUsuarios"');
 
         try {
