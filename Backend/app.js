@@ -3,6 +3,7 @@ const PORTA = 3000;
 const express = require("express");
 const cors = require("cors");
 const bodyParser = require("body-parser");
+require('./App/database');
 
 const app = express();
 
