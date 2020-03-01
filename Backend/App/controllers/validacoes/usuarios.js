@@ -7,6 +7,6 @@ module.exports = function (req, res) {
         throw new Error("campo 'email' é obrigatório.");
 
     if (!req.body.senha)
-        throw new Error("campo 'password' é obrigatório.");
+        throw new Error("campo 'senha' é obrigatório.");
 
 }

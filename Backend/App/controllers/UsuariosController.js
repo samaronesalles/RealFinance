@@ -67,7 +67,7 @@ module.exports = {
         try {
 
             if (!email)
-                throw new Error("É obrigatório o 'email' nos parâmetros da request.");
+                throw new Error("É obrigatório o 'email' no corpo da requisição.");
 
             const usuarioEncontrado = await Usuario.findOne({
                 where: { email: email },
@@ -98,7 +98,7 @@ module.exports = {
             const { name, email, senha } = req.body;
 
             if (!email)
-                throw new Error("É obrigatório o 'email' nos parâmetros da request.");
+                throw new Error("É obrigatório o 'email' no corpo da requisição.");
 
             let usuarioEncontrado = await Usuario.findOne({
                 where: { email: email },
@@ -163,7 +163,7 @@ module.exports = {
 
 
     // Métodos úteis
-    async AutenticaLogin(req, res) {                                        // Testado: 
+    async AutenticaLogin(req, res) {                                        // Testado: OK
         console.log('chegou em "controller>UsuariosController.AutenticaLogin"');
 
         let { email, senha } = req.body;
@@ -200,4 +200,5 @@ module.exports = {
         }
 
     },
+
 };
