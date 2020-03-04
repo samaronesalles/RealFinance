@@ -5,7 +5,10 @@
   "main": "app.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "nodemon app.js"
+    "predev": "sequelize db:migrate",
+    "dev": "nodemon app.js",
+    "prestart": "sequelize db:migrate",
+    "start": "nodemon app.js"
   },
   "author": "",
   "license": "ISC",
