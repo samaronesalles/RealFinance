@@ -15,5 +15,6 @@ routes.delete('/user', userController.deleteUsuario);                           
 
 // Categorias
 routes.post('/cat', CatController.novaCategoria);                                              // Testado: OK
+routes.get('/cats', CatController.listaCategorias);                                            // Testado: 
 
 module.exports = routes;

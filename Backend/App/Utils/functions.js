@@ -13,7 +13,10 @@ function RecDespToInt(tipo) {
     if (tipo.charAt(0) == 'd')
         return 0;
 
-    return 1;
+    if (tipo.charAt(0) == 'r')
+        return 1;
+
+    return -1;
 }
 
 function IntToRecDesp(tipo) {
