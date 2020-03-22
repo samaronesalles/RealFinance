@@ -1,6 +1,6 @@
 {
 	"info": {
-		"_postman_id": "2e2d0a0e-8645-4b32-83a9-f05a157547ab",
+		"_postman_id": "09fe9611-8128-4cbe-ae19-3312a8c628c5",
 		"name": "RealControle",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
@@ -191,6 +191,40 @@
 							"path": [
 								"api",
 								"userLogin"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "Categorias",
+			"item": [
+				{
+					"name": "Criar Nova",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"descricao\":\"Faculdade\",\n\t\"tipo\": \"despesa\"\n\t\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:3000/api/cat",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"cat"
 							]
 						}
 					},
