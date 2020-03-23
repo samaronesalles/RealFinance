@@ -5,7 +5,7 @@ const atributos_Contegorias = ['id', 'descricao', 'tipo'];
 module.exports = {
 
     // Métodos CRUD
-    async novaCategoria(req, res) {                                           // Testado: 
+    async novaCategoria(req, res) {                                           // Testado: OK
         console.log('chegou em "Controllers>CategoriasController.novaCategoria"');
 
         try {
@@ -26,7 +26,7 @@ module.exports = {
             const cat_temp = await Categoria.findOne({ where: { descricao: descricao, receita_ou_despesa: Utils.RecDespToInt(tipo) } });
 
             if (cat_temp) {
-                throw new Error(`Categoria '${descricao}' já registrada para o tipo '${tipo}'.`);
+                throw new Error(`Categoria '${descricao}' já cadastrada para o tipo '${tipo}'.`);
             }
 
             // Criando categoria no banco de dados
@@ -37,7 +37,7 @@ module.exports = {
 
             let novaCategoria = await Categoria.create(req.body);
 
-            // sempre que criar um novo usuário, em caso de sucesso, o retornaremos com todos os dados.
+            // sempre que criar uma nova categoria, em caso de sucesso, o retornaremos com todos os dados.
             novaCategoria = await Categoria.findByPk(novaCategoria.id);
 
             novaCategoria['tipo'] = Utils.IntToRecDesp(novaCategoria['receita_ou_despesa']);
@@ -51,14 +51,14 @@ module.exports = {
 
     },
 
-    async listaCategorias(req, res) {
+    async listaCategorias(req, res) {                                         // Testado: OK
         console.log('chegou em "Controllers>CategoriasController.listaCategorias"');
 
         try {
 
             let categorias = await Categoria.findAll({ atributes: atributos_Contegorias });
 
-            if (categorias)
+            if (categorias) {
                 categorias.map((item) => {
                     const i = item.dataValues["receita_ou_despesa"];
 
@@ -67,7 +67,8 @@ module.exports = {
                     delete item.dataValues.updatedAt;
 
                     item.dataValues["tipo"] = Utils.IntToRecDesp(i);
-                })
+                });
+            }
 
             return res.json(categorias);
 
