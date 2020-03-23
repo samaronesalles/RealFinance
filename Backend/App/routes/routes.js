@@ -5,6 +5,7 @@ const routes = express.Router();
 const userController = require('../controllers/UsuariosController');
 const CatController = require('../controllers/CategoriasController');
 const TipoController = require('../controllers/TiposController');
+const auth = require('./middleware/auth');
 
 // Usuários
 routes.post('/users', userController.novoUsuario);                                             // Testado: OK
@@ -13,6 +14,7 @@ routes.post('/userLogin', userController.AutenticaLogin);                       
 routes.post('/user', userController.dadosUsuario);                                             // Testado: OK
 routes.put('/user', userController.atualizarUsuario);                                          // Testado: OK
 routes.delete('/user', userController.deleteUsuario);                                          // Testado: OK
+routes.get('/auth', auth.isLogged, userController.auth);
 
 // Categorias
 routes.post('/cat', CatController.novaCategoria);                                              // Testado: OK

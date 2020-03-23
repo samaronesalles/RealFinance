@@ -189,8 +189,10 @@ module.exports = {
             let pass = usuarioEncontrado.senha;
             pass = Crypt.decrypt(pass);
 
-            if (pass === senha)
+            if (pass === senha) {
+                req.session.user = usuarioEncontrado;
                 return res.json(usuarioEncontrado);
+            }
             else
                 throw new Error("email ou senha informados estão incorretos, ou o usuário não existe.");
 
@@ -200,5 +202,8 @@ module.exports = {
         }
 
     },
+    async auth(req, res) {
+        return res.json(req.session.user);
+    }
 
 };
