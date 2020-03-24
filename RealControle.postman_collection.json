@@ -216,7 +216,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n\t\"descricao\" : \"rolê\",\n\t\"tipo\" : \"despesa\"\n}",
+							"raw": "{\n\t\"nome\": \"Alimentação\",\n\t\"descricao\" : \"Toda despesa que eu fizer comprando cafézinho\",\n\t\"cor\" : \"Red\",\n\t\"tipo\" : \"despesa\"\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -251,66 +251,6 @@
 							"path": [
 								"api",
 								"cats"
-							]
-						}
-					},
-					"response": []
-				}
-			],
-			"protocolProfileBehavior": {}
-		},
-		{
-			"name": "Categorias>Tipos",
-			"item": [
-				{
-					"name": "tipo",
-					"request": {
-						"method": "POST",
-						"header": [
-							{
-								"key": "Content-Type",
-								"name": "Content-Type",
-								"value": "application/json",
-								"type": "text"
-							}
-						],
-						"body": {
-							"mode": "raw",
-							"raw": "{\n\t\"descricao\" : \"alimentação\",\n\t\"tipo\" : \"despesa\",\n\t\"categoria\": 1\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "localhost:3000/api/tipo",
-							"host": [
-								"localhost"
-							],
-							"port": "3000",
-							"path": [
-								"api",
-								"tipo"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "Retornar todos",
-					"request": {
-						"method": "GET",
-						"header": [],
-						"url": {
-							"raw": "localhost:3000/api/tipos",
-							"host": [
-								"localhost"
-							],
-							"port": "3000",
-							"path": [
-								"api",
-								"tipos"
 							]
 						}
 					},

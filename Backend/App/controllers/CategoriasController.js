@@ -1,6 +1,7 @@
+const ChecCat = require('./validacoes/categorias');
 const Categoria = require('../models/CategoriasModel');
 const Utils = require('../Utils/functions');
-const atributos_Contegorias = ['id', 'descricao', 'tipo'];
+const atributos_Contegorias = ['id', 'nome', 'descricao', 'cor'];
 
 module.exports = {
 
@@ -9,24 +10,14 @@ module.exports = {
         console.log('chegou em "Controllers>CategoriasController.novaCategoria"');
 
         try {
-            const { descricao, tipo } = req.body;
+            const { nome, tipo } = req.body;
 
-            if (!descricao) {
-                throw new Error("campo 'descricao' é obrigatório.");
-            }
+            ChecCat(req, res);
 
-            if (!tipo) {
-                throw new Error("campo 'tipo' é obrigatório.");
-            }
-
-            if ((tipo != 'despesa') && (tipo != 'receita')) {
-                throw new Error("campo 'tipo' deve ser apenas 'despesa' ou 'receita'.");
-            }
-
-            const cat_temp = await Categoria.findOne({ where: { descricao: descricao, receita_ou_despesa: Utils.RecDespToInt(tipo) } });
+            const cat_temp = await Categoria.findOne({ where: { nome: nome, receita_ou_despesa: Utils.RecDespToInt(tipo) } });
 
             if (cat_temp) {
-                throw new Error(`Categoria '${descricao}' já cadastrada para o tipo '${tipo}'.`);
+                throw new Error(`Categoria '${nome}' já cadastrada para o tipo '${tipo}'.`);
             }
 
             // Criando categoria no banco de dados
@@ -38,10 +29,13 @@ module.exports = {
             let novaCategoria = await Categoria.create(req.body);
 
             // sempre que criar uma nova categoria, em caso de sucesso, o retornaremos com todos os dados.
-            novaCategoria = await Categoria.findByPk(novaCategoria.id);
+            novaCategoria = await Categoria.findByPk(novaCategoria.id, { atributes: atributos_Contegorias });
 
-            novaCategoria['tipo'] = Utils.IntToRecDesp(novaCategoria['receita_ou_despesa']);
-            delete novaCategoria['receita_ou_despesa'];
+            novaCategoria.dataValues['tipo'] = Utils.IntToRecDesp(novaCategoria.dataValues['receita_ou_despesa']);
+
+            delete novaCategoria.dataValues.receita_ou_despesa;
+            delete novaCategoria.dataValues.createdAt;
+            delete novaCategoria.dataValues.updatedAt;
 
             return res.json(novaCategoria);
 
@@ -77,4 +71,5 @@ module.exports = {
         }
     }
 
+    
 };

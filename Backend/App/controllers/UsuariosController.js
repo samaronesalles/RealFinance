@@ -202,6 +202,7 @@ module.exports = {
         }
 
     },
+
     async auth(req, res) {
         return res.json(req.session.user);
     }

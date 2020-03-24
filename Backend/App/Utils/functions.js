@@ -1,11 +1,11 @@
 'use strict';
 
 function tipoBD_Despesa(tipo) {
-    return tipo = 0 ? true : false;
+    return tipo == 0 ? true : false;
 }
 
 function tipoBD_Receita(tipo) {
-    return tipo = 1 ? true : false;
+    return tipo == 1 ? true : false;
 }
 
 function RecDespToInt(tipo) {
@@ -21,7 +21,7 @@ function RecDespToInt(tipo) {
 
 function IntToRecDesp(tipo) {
 
-    if (tipo = 0)
+    if (tipo == 0)
         return 'Despesa';
 
     return 'Receita';

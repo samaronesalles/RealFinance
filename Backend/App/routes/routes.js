@@ -4,7 +4,6 @@ const routes = express.Router();
 // Controllers
 const userController = require('../controllers/UsuariosController');
 const CatController = require('../controllers/CategoriasController');
-const TipoController = require('../controllers/TiposController');
 const auth = require('./middleware/auth');
 
 // Usuários
@@ -19,9 +18,5 @@ routes.get('/auth', auth.isLogged, userController.auth);
 // Categorias
 routes.post('/cat', CatController.novaCategoria);                                              // Testado: OK
 routes.get('/cats', CatController.listaCategorias);                                            // Testado: OK
-
-// Tipos
-routes.post('/tipo', TipoController.novoTipo);                                                 // Testado: OK
-routes.get('/tipos', TipoController.listaTipos);                                               // Testado: 
 
 module.exports = routes;
