@@ -1,6 +1,6 @@
-<section class="content login-content">
-    <div class="col-sm-6">
-        <p class="login-box-msg">Cadastrar novo usuário</p>
+<section class="content">
+    <div class="col-xs-12 col-sm-offset-3 col-sm-6 login-box-body"> 
+        <p class="texto">Cadastrar novo usuário</p>
         <form #form="ngForm" novalidate>
             <div class="form-group has-feedback">
                 <input type="text" name="name" required ngModel class="form-control" placeholder="Nome">
@@ -24,7 +24,7 @@
             </div>
             <div class="row">
                 <div class="col-xs-offset-8 col-xs-4">
-                    <button type="submit" class="btn btn-primary btn-block btn-flat" (click)="createNew(form.value)"
+                    <button type="submit" class="btn btn-success btn-block btn-flat" (click)="createNew(form.value)"
                         [disabled]="!form.valid">Cadastrar</button>
                 </div>
                 <div>

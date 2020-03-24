@@ -1,6 +1,6 @@
-<section class="content login-content" style="margin: 10% auto">
-  <div class="col-sm-6">
-    <p>Por favor, efetue o login para continuar</p>
+<section class="content">
+  <div class="col-xs-12 col-sm-offset-3 col-sm-6 login-box-body">   
+    <p class="texto">Por favor, efetue o login para continuar</p>
     <form #form="ngForm" novalidate>
       <div class="form-group has-feedback">
         <input type="email" name="email" #iptemail="ngModel"
@@ -14,7 +14,7 @@
       </div>
       <div class="row">
         <div class="col-xs-offset-8 col-xs-4">
-          <button type="submit" class="btn btn-primary btn-block btn-flat" (click)="autenticateUser(form.value)"
+          <button type="submit" class="btn btn-success btn-block btn-flat" (click)="autenticateUser(form.value)"
             [disabled]="!form.valid">Entrar</button>
         </div>
         <div>
