@@ -21,7 +21,7 @@ export class SignInComponent implements OnInit {
   async autenticateUser(user: User) {
     try {
       const response = await this.loginservice.autenticateUser(user);
-      this.router.navigate(['/']);
+      this.router.navigate(['/logged']);
     } catch (err) {
       this.errorMessage = err.response.data.error;
     }
