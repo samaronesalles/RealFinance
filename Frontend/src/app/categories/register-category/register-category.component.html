@@ -1,0 +1,91 @@
+
+    <section class="teste">
+        <div class="container">
+            <div class="container-form">
+                {{form.valid }}
+                {{form.value | json}}
+                   <form #form="ngForm" novalidate>
+                        <div class="titulo-page">
+                            <h3>Cadastro Categorias</h3>
+                            <hr>
+                        </div>
+                        <div class="form-group" [class.is-valid]="inputDescription.valid && (inputDescription.dirty || inputDescription.touched)">
+                            <div class="col-md-4 mb-3">
+                            <label>Nome</label>
+                            <input id="descriptionField"  name="description" ngModel type="text" class="form-control lg "   required  maxlength="20" #inputDescription="ngModel"  autocomplete="off"
+                            [class.is-valid]="inputDescription.valid && (inputDescription.dirty || inputDescription.touched)"
+                            [class.is-invalid]="!inputDescription.valid && (inputDescription.dirty || inputDescription.touched)">
+                            <div class="valid-feedback"> OK</div>
+                            <div class="invalid-feedback"> Campo Obrigatório com quantidade maxima de 20 caracteres.</div>
+                            </div>
+                            
+                        </div>
+
+                        <div class="form-group" >
+                            <div class="col-md-6 mb-3">
+                                <label>Descrição</label>
+                                <input id="descriptionField"  name="description" ngModel type="text" class="form-control lg "   required  minlength="5" #inputDescription="ngModel"  autocomplete="off">
+                            </div>
+                        </div>
+
+                        
+                        <!-- <div class="col-md-4 mb-3">
+                            <p class="lead">Formas de Pagamento:</p>
+        
+                            <div class="form-group">
+                                <app-radio [options]="categoryOptions"></app-radio>
+                             </div>
+
+                        </div>  -->
+
+
+                        <label>Tipo</label>
+                        <div class="form-check" >
+                            <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios1" value="receita" checked>
+                            <label class="form-check-label" for="exampleRadios1">
+                              Receita
+                            </label>
+                          </div>
+                          <div class="form-check">
+                            <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios2" value="despesa">
+                            <label class="form-check-label" for="exampleRadios2">
+                              Despesa
+                            </label>
+                          </div>
+                        
+                        
+                  
+                      
+                          
+                        <div class="col-md-4 mb-3">
+                            <label>Tipo</label>
+                            <div>
+                                <label >
+                                    <input  type="radio" name="Despesa" value="despesa" />
+                                    Despesa
+                                </label>
+
+                                <label>
+                                    <input type="radio" name="receita" value="receita" />
+                                    Receita
+                                </label>
+                            </div>
+                        </div>
+                   
+                        <div class="col-md-4 mb-3">
+                            <label>Cor Despesa/Receita</label>
+                            <input type="color" required/>
+                        </div>
+                   </form>
+
+                   <div>
+                        <div class="col-md-4 mb-3">
+                            <button (click)="createNewCategory(form.value)" type="button" [disabled]="!form.valid" class="btn btn-lg btn-success">Cadastrar</button>
+                        </div>
+                    </div>
+            </div>
+        </div>
+
+    </section>
+
+
