@@ -216,7 +216,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n\t\"nome\": \"Alimentação\",\n\t\"descricao\" : \"Toda despesa que eu fizer comprando cafézinho\",\n\t\"cor\" : \"Red\",\n\t\"tipo\" : \"despesa\"\n}",
+							"raw": "{\n\t\"nome\": \"lazer\",\n\t\"descricao\" : \"Toda despesa que eu fizer aos finais de semana\",\n\t\"cor\" : \"Green\",\n\t\"tipo\" : \"despesa\"\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -224,14 +224,14 @@
 							}
 						},
 						"url": {
-							"raw": "localhost:3000/api/cat",
+							"raw": "localhost:3000/api/cats",
 							"host": [
 								"localhost"
 							],
 							"port": "3000",
 							"path": [
 								"api",
-								"cat"
+								"cats"
 							]
 						}
 					},
@@ -251,6 +251,75 @@
 							"path": [
 								"api",
 								"cats"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Retorna categoria",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:3000/api/cats/7",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"cats",
+								"7"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "delete categoria",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "localhost:3000/api/cats/1",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"cats",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "atualizar categoria",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"nome\": \"lazer\",\n\t\"descricao\" : \"minha descrição qualquer\",\n\t\"cor\" : \"black\",\n\t\"tipo\" : \"receita\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:3000/api/cats/1",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"cats",
+								"1"
 							]
 						}
 					},

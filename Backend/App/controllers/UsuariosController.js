@@ -12,7 +12,7 @@ module.exports = {
         try {
             const { nome, email, senha } = req.body;
 
-            CheckUser(req, res);
+            CheckUser.CamposObrigatorios(req, res);
 
             const usario_temp = await Usuario.findOne({ where: { email: email } });
 
@@ -107,7 +107,7 @@ module.exports = {
             if (!usuarioEncontrado)
                 throw new Error("Usuário não encontrado.");
 
-            CheckUser(req, res);
+            CheckUser.CamposObrigatorios(req, res);
 
             let pass = senha;
             if (pass) {

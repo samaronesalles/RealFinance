@@ -1,4 +1,4 @@
-module.exports = function (req, res) {
+function CamposObrigatorios(req, res) {
 
     if (!req.body.nome)
         throw new Error("campo 'name' é obrigatório.");
@@ -10,3 +10,5 @@ module.exports = function (req, res) {
         throw new Error("campo 'senha' é obrigatório.");
 
 }
+
+module.exports = { CamposObrigatorios };

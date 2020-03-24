@@ -1,4 +1,4 @@
-const ChecCat = require('./validacoes/categorias');
+const CheckCat = require('./validacoes/categorias');
 const Categoria = require('../models/CategoriasModel');
 const Utils = require('../Utils/functions');
 const atributos_Contegorias = ['id', 'nome', 'descricao', 'cor'];
@@ -12,7 +12,7 @@ module.exports = {
         try {
             const { nome, tipo } = req.body;
 
-            ChecCat(req, res);
+            CheckCat.CamposObrigatorios(req, res);
 
             const cat_temp = await Categoria.findOne({ where: { nome: nome, receita_ou_despesa: Utils.RecDespToInt(tipo) } });
 
@@ -69,7 +69,119 @@ module.exports = {
         } catch (error) {
             return res.status(400).json({ error: error.message });
         }
-    }
+    },
 
-    
+    async dadosCategoria(req, res) {                                          // Testado: OK
+        console.log('chegou em "Controllers>CategoriasController.dadosCategoria"');
+
+        try {
+
+            const { id } = req.params;
+
+            if (!id) {
+                throw new Error('É obrigatório informar o id da categoria');
+            }
+
+            let categoria = await Categoria.findByPk(id, { atributes: atributos_Contegorias });
+
+            if (!categoria) {
+                throw new Error(`Categoria id '${id}' não encontrada no cadastro.`);
+            }
+
+            if (categoria) {
+                const i = categoria.dataValues["receita_ou_despesa"];
+
+                delete categoria.dataValues.receita_ou_despesa;
+                delete categoria.dataValues.createdAt;
+                delete categoria.dataValues.updatedAt;
+
+                categoria.dataValues["tipo"] = Utils.IntToRecDesp(i);
+            }
+
+            return res.json(categoria);
+
+        } catch (error) {
+            return res.status(400).json({ error: error.message });
+        }
+    },
+
+    async deleteCategoria(req, res) {                                         // Testado: OK
+        console.log('chegou em "Controllers>CategoriasController.deleteCategoria"');
+
+        try {
+
+            const { id } = req.params;
+
+            if (!id) {
+                throw new Error('É obrigatório informar o id da categoria');
+            }
+
+            const categoria = await Categoria.findByPk(id);
+
+            if (!categoria) {
+                throw new Error(`Categoria id '${id}' não encontrada no cadastro.`);
+            }
+
+            if (CheckCat.totalEmLancamentos(req, res) > 0.0) {
+                throw new Error(`Categoria id '${id}' não pode ser excluída, por possuir lançamentos financeiros vinculados a ela.`);
+            }
+
+            await categoria.destroy({
+                where: {
+                    id: id
+                }
+            });
+
+            return res.json();
+
+        } catch (error) {
+            return res.status(400).json({ error: error.message });
+        }
+    },
+
+    async atualizarCategoria(req, res) {                                      // Testado: 
+        console.log('chegou em "Controllers>CategoriasController.atualizarCategoria"');
+
+        try {
+
+            const { id } = req.params;
+
+            if (!id) {
+                throw new Error('É obrigatório informar o id da categoria');
+            }
+
+            CheckCat.CamposObrigatorios(req, res);
+
+            let categoria = await Categoria.findByPk(id);
+
+            if (!categoria) {
+                throw new Error(`Categoria id '${id}' não encontrada no cadastro.`);
+            }
+
+            const tipoConvertido = Utils.RecDespToInt(req.body['tipo']);
+            delete tipoConvertido['tipo'];
+
+            req.body['receita_ou_despesa'] = tipoConvertido;
+
+            await categoria.update(req.body, {
+                where: {
+                    id: id
+                },
+                returning: true,
+                plain: true
+            });
+
+            categoria.dataValues['tipo'] = Utils.IntToRecDesp(categoria.dataValues['receita_ou_despesa']);
+
+            delete categoria.dataValues.receita_ou_despesa;
+            delete categoria.dataValues.createdAt;
+            delete categoria.dataValues.updatedAt;
+
+            return res.json(categoria);
+
+        } catch (error) {
+            return res.status(400).json({ error: error.message });
+        }
+    },
+
 };
