@@ -33,7 +33,7 @@ import {Category} from './category/category.model'
 
 
     async  listCategories(){
-      const response = await API.post('/cats');
+      const response = await API.get('/cats');
   
       return response.data;
     }
