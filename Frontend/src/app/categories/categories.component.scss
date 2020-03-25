@@ -32,28 +32,8 @@
     box-shadow: 2px 2px 0 #c4c4c4;
 }
 
-.item-category{
-    text-align: center;
-    width: 420px;
-    height: 120px;
-    margin:10px;
-    background-color: white;
-    border-radius: 12px;
-    box-shadow: 2px 2px  grey;
 
-}
 
-.f-title{
-    color: grey;
-    font-family: 'Quicksand', sans-serif; 
-    font-size: 20px;
-}
-
-.f-desc{
-    color: grey;
-    font-family: 'Quicksand', sans-serif; 
-    font-size: 12px;
-}
 
 .panel-item{
     width:60%;
@@ -63,8 +43,6 @@
     font-size: 20px;
     text-align: center;
     color: grey;
-  
-  
 }
 
 .panel-item-op{
@@ -79,9 +57,7 @@
     flex-direction: row;
     justify-content: center;
     align-items: center;
-  
 }
-
 
 .container {
 	display: flex;
@@ -102,19 +78,9 @@
 
 }
 
-.item-category .description{
-    float: left;
-    width:70%;
-    height: 100%;
-    text-align:start;
-}
 
-.item-category .category-sum{
-    float: right;
-    height: 100%;
-    width: 30%;
 
-}
+
 
 
 .description .description-title{
@@ -122,13 +88,6 @@
     height: 50%;
 }
 
-
-.fc {
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    align-items: center;
-}
 
 .action{
     width: 100%;

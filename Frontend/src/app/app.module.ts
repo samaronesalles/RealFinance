@@ -13,6 +13,8 @@ import { HeaderComponent } from './header/header.component';
 import { HomeComponent } from './home/home.component';
 import { CategoriesComponent } from './categories/categories.component';
 import { RegisterCategoryComponent } from './categories/register-category/register-category.component';
+import { CategoryComponent } from './categories/category/category.component';
+
 
 
 @NgModule({
@@ -25,7 +27,7 @@ import { RegisterCategoryComponent } from './categories/register-category/regist
     HomeComponent,
     CategoriesComponent,
     RegisterCategoryComponent,
-  
+    CategoryComponent
   ],
   imports: [
     BrowserModule,

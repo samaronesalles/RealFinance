@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { API } from '../app.api';
-import {Category} from './category.model'
+import {Category} from './category/category.model'
+
 
 @Injectable({
     providedIn: 'root'
@@ -11,15 +12,33 @@ import {Category} from './category.model'
     constructor() { }
 
     async createNewCategory(category:Category){
-        const response = await API.post('/users',{
-          name: category.name,
-          description : category.description,
+  
+        const response = await API.post('/cats',{
+          nome: category.nome,
+          descricao : category.descricao,
           cor : category.cor,
-          tipo : category.tipo
+          tipo: category.tipo
         });
 
         return response.data;
     }
+
+
+    getOptionsRadio(){
+      return [
+        {valor:'receita', desc:'Receita'},
+        {valor:'despesa', desc:'Despesa'}
+      ]
+    }
+
+
+    async  listCategories(){
+      const response = await API.post('/cats');
+  
+      return response.data;
+    }
+
+
   }
 
 

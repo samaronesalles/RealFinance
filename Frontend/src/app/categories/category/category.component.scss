@@ -1,0 +1,44 @@
+.item-category{
+    text-align: center;
+    width: 420px;
+    height: 120px;
+    margin:10px;
+    background-color: white;
+    border-radius: 12px;
+    box-shadow: 2px 2px  grey;
+
+}
+
+.item-category .description{
+    float: left;
+    width:70%;
+    height: 100%;
+    text-align:start;
+}
+
+
+.f-title{
+    color: grey;
+    font-family: 'Quicksand', sans-serif; 
+    font-size: 20px;
+}
+
+.f-desc{
+    color: grey;
+    font-family: 'Quicksand', sans-serif; 
+    font-size: 12px;
+}
+
+.fc {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+
+.item-category .category-sum{
+    float: right;
+    height: 100%;
+    width: 30%;
+
+}
