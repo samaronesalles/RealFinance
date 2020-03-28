@@ -3,10 +3,11 @@ import { Routes, RouterModule } from '@angular/router';
 import { LoginComponent } from './login/login.component';
 import { HomeComponent } from './home/home.component';
 import {CategoriesComponent} from './categories/categories.component'
-import {RegisterCategoryComponent} from './categories/register-category/register-category.component'
 import { LoggedComponent } from './logged/logged.component';
 import { SignInComponent } from './login/sign-in/sign-in.component';
 import { SignUpComponent } from './login/sign-up/sign-up.component';
+import { CategoryFormComponent } from './categories/category-form/category-form.component';
+import { CategoryResolverGuard } from './categories/guards/category-resolver.guard';
 
 
 const routes: Routes = [
@@ -15,7 +16,8 @@ const routes: Routes = [
   { path: 'sign-up', component: SignUpComponent },
   {path: 'logged', component: LoggedComponent},
   {path: 'categories', component: CategoriesComponent},
-  {path: 'rg-category', component: RegisterCategoryComponent}
+  {path:'novo', component: CategoryFormComponent, resolve:{category: CategoryResolverGuard}},
+  {path:'editar/:id', component: CategoryFormComponent, resolve:{category: CategoryResolverGuard}}
 ];
 
 @NgModule({

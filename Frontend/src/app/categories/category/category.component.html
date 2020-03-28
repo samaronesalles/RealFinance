@@ -1,11 +1,20 @@
-
-    <div class="item-category">
-        <div class="description">
-            <div class="description-title f-title">{{category.nome}}<hr></div>
-            <div class="description-title f-desc"> {{category.descricao}}</div>
-        </div>
-        <div class="category-sum f-title fc">
-           R$ 0,00
-        </div>
+<div class="item-category pdd-lg" >
+    <div class="card-header">
+       <div class="card-title f-title">{{category.nome}}</div>
+       <div class="card-actions">
+            <a class="icons"><img src="assets/img/icon-delete.png" (click)="delete(category.id)"  title="Delete" width="10px"  height="10px"></a>
+            <a class="icons"><img src="assets/img/icon-edit2.png"  title="Edit"   width="20px" height="20px" (click) ="onEdit(category.id)">
+              
+            </a> 
+            <a class="f-desc lbl-receita" name="tipo">{{category.tipo}}</a>  
+       </div>
     </div>
+    <div class="card-info border-top">
+     <div class="col-desc f-desc fcl">{{category.descricao}}</div>
+      <div class="col-val f-title fc">R$ 15,00</div>
+    </div>
+</div>
+
+
+    
 
