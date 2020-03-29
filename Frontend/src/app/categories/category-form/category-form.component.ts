@@ -26,7 +26,6 @@ export class CategoryFormComponent implements OnInit {
   form: FormGroup;
   submitted = false;
   messageReturn = undefined;
-  //category: Category
   categoryTypes: any[]
 
   ngOnInit() {
@@ -39,46 +38,16 @@ export class CategoryFormComponent implements OnInit {
       id: category.id,
       nome: [category.nome, [Validators.required]],
       descricao: [category.descricao],
-      tipo: [category.tipo,[Validators.required]],
-      cor: [category.cor,[Validators.required]]
+      cor: [category.cor,[Validators.required]],
+      tipo: [category.receita_ou_despesa,[Validators.required]],
 
     });
   }
 
 
-  loadRadioButton(tipo){
-    if(tipo == 'despesa'){
-      this.categoryTypes = [
-        {
-          valor:'despesa',
-          value: true,
-          desc:'Despesa'
-        },
-        {
-          valor:'receita',
-          value: false,
-          desc:'Receita'
-        }
-      ];
-    }else{
-      this.categoryTypes = [
-        {
-          valor:'despesa',
-          value: false,
-          desc:'Despesa'
-        },
-        {
-          valor:'receita',
-          value: true,
-          desc:'Receita'
-        }
-      ];
-    }
-  }
 
   onSubmit() {
     this.submitted = true;
-    console.log(this.form.value)
     if (this.form.valid) {
 
       let msgSucess = 'Curso criado com sucesso'
@@ -91,7 +60,7 @@ export class CategoryFormComponent implements OnInit {
       
       this.service.save(this.form.value).then( 
         sucess => {this.messageReturn = msgSucess}, 
-        error  => {this.messageReturn = msgError})
+        error  => { this.messageReturn = msgError})
     }
   }
 

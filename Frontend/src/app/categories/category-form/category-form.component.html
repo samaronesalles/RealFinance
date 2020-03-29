@@ -39,15 +39,18 @@
                     <label>Cor Despesa/Receita</label>
                     <input type="color" name="cor" formControlName="cor" />
                 </div>
+                
+               
             </form>
 
             <div>
                 <div class="col-md-4 mb-3 div-actions">
-                    <button (click)="onSubmit()" type="submit" class="btn btn-success btn-actions">Salvar</button>
+                    <button (click)="onSubmit()" type="submit" *ngIf="form.value" data-toggle="modal"  data-target="#exampleModalLong" class="btn btn-success btn-actions">Salvar</button>
                     <button type="button" [routerLink]="['/categories']" class="btn btn-outline-dark">Cancelar</button>
                 </div>
             </div>
         </div>
     </div>
-
+  
+    <app-modal [messageReturn]="messageReturn" ></app-modal> 
 </section>

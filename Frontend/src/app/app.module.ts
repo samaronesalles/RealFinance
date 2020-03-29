@@ -14,6 +14,7 @@ import { HomeComponent } from './home/home.component';
 import { CategoriesComponent } from './categories/categories.component';
 import { CategoryComponent } from './categories/category/category.component';
 import { CategoryFormComponent } from './categories/category-form/category-form.component';
+import { ModalComponent } from './shared/modal/modal.component';
 
 
 
@@ -27,7 +28,8 @@ import { CategoryFormComponent } from './categories/category-form/category-form.
     HomeComponent,
     CategoriesComponent,
     CategoryComponent,
-    CategoryFormComponent
+    CategoryFormComponent,
+    ModalComponent
   ],
   imports: [
     BrowserModule,

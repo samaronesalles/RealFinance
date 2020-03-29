@@ -24,8 +24,10 @@ export class CategoryResolverGuard implements Resolve<Category> {
         id: null,
         nome: null,
         descricao: null,
-        tipo: null,
-        cor: null
+        cor: null,
+        receita_ou_despesa: null,
+        receita_ou_despesa_desc: null,
+       
       });
     }
 
