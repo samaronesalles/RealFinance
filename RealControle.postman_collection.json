@@ -216,7 +216,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n\t\"nome\": \"teste 3\",\n\t\"descricao\" : \"eeeeeeeeeeeeeeeeeana\",\n\t\"cor\" : \"Green\",\n\t\"tipo\" : \"0\"\n}",
+							"raw": "{\n\t\"nome\": \"teste 5\",\n\t\"descricao\" : \"eeeeeeeeeeeeeeeeeana\",\n\t\"cor\" : \"Green\",\n\t\"tipo\" : 0\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -303,7 +303,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n\t\"nome\": \"reste 3333\",\n\t\"descricao\" : \"fffftest emerge quer\",\n\t\"cor\" : \"black\",\n\t\"tipo\" : \"1\"\n}",
+							"raw": "{\n\t\"nome\": \"teste 5\",\n\t\"descricao\" : \"eeeeeeeeeeeeeeeeeana\",\n\t\"cor\" : \"Green\",\n\t\"tipo\" : 0\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -311,7 +311,7 @@
 							}
 						},
 						"url": {
-							"raw": "localhost:3000/api/cats/21",
+							"raw": "localhost:3000/api/cats/5",
 							"host": [
 								"localhost"
 							],
@@ -319,7 +319,7 @@
 							"path": [
 								"api",
 								"cats",
-								"21"
+								"5"
 							]
 						}
 					},
