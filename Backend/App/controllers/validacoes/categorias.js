@@ -12,7 +12,7 @@ function CamposObrigatorios(req, res) {
         throw new Error("campo 'cor' é obrigatório.");
     }
 
-    if (!req.body.tipo) {
+    if (typeof req.body.tipo === "undefined") {
         throw new Error("campo 'tipo' é obrigatório.");
     }
 
