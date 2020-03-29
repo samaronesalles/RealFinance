@@ -58,9 +58,9 @@ export class CategoryFormComponent implements OnInit {
         msgError=' Erro ao atualizar curso, tente novamente.';
       }
       
-      this.service.save(this.form.value).then( 
-        sucess => {this.messageReturn = msgSucess}, 
-        error  => { this.messageReturn = msgError})
+         this.service.save(this.form.value).then( 
+         sucess => {this.messageReturn = msgSucess}, 
+         error => { this.messageReturn = error})
     }
   }
 
