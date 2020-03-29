@@ -216,7 +216,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n\t\"nome\": \"lazer\",\n\t\"descricao\" : \"Toda despesa que eu fizer aos finais de semana\",\n\t\"cor\" : \"Green\",\n\t\"tipo\" : \"despesa\"\n}",
+							"raw": "{\n\t\"nome\": \"teste 3\",\n\t\"descricao\" : \"eeeeeeeeeeeeeeeeeana\",\n\t\"cor\" : \"Green\",\n\t\"tipo\" : \"0\"\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -303,7 +303,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n\t\"nome\": \"lazer\",\n\t\"descricao\" : \"minha descrição qualquer\",\n\t\"cor\" : \"black\",\n\t\"tipo\" : \"receita\"\n}",
+							"raw": "{\n\t\"nome\": \"reste 3333\",\n\t\"descricao\" : \"fffffffffffffffffffffquer\",\n\t\"cor\" : \"black\",\n\t\"tipo\" : \"1\"\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -311,7 +311,7 @@
 							}
 						},
 						"url": {
-							"raw": "localhost:3000/api/cats/1",
+							"raw": "localhost:3000/api/cats/21",
 							"host": [
 								"localhost"
 							],
@@ -319,7 +319,7 @@
 							"path": [
 								"api",
 								"cats",
-								"1"
+								"21"
 							]
 						}
 					},
