@@ -1,13 +1,24 @@
 .item-category{
     text-align: center;
-    width: 420px;
-    height: 120px;
-    margin:10px;
+    width: 320px;
+    height: 150px;
+    margin:20px;
     background-color: #ffffff;
     border-radius: 12px;
-    box-shadow: 1px 1px  #C1CDC1;	
+    box-shadow: 2px 2px  #c0c0c0;	
 
 }
+// animação
+.item{
+    transition: all 0.5s;
+    cursor: pointer;
+}
+
+.item:hover{
+    -webkit-filter: drop-shadow(15px 10px 5px rgba(0,0,0,.5));
+    filter: drop-shadow(15px 10px 5px rgba(0,0,0,.5));
+}
+
 .pdd-lg{
     padding: 12px;
 }
@@ -25,6 +36,7 @@
     width: 60%;
     height: 100%;
     text-align:start;
+    
 }
 
 .card-actions{
@@ -64,7 +76,7 @@
     color: grey;
     //font-family: 'Quicksand', sans-serif; 
     font-family: 'Maven Pro', sans-serif;
-    font-size: 20px;
+    font-size: 100%;
 }
 
 .f-desc{
@@ -79,12 +91,18 @@
     align-items: center;
     justify-content: start;
 }
-
+// fonte centralizada 
 .fc {
     display: flex;
     flex-direction: row;
     justify-content: center;
     align-items: center;
+}
+
+.fg{
+    color: grey;
+    font-family: 'Quicksand', sans-serif; 
+    font-size: 20px; 
 }
 
 // borda
@@ -96,17 +114,30 @@
 
 
 // TESTE
-
-.lbl-depesa{
-    background-color: brown;
+.lbl-tipo{
+    list-style: none;
     border-radius: 12px;
     color:white;
      width: 60px;
      height: 20px;
-     float: left;
+     float: right;
+     
 }
-.lbl-receita{
+
+ .lbl-despesa {
+    background-color: #228b22;
+    list-style: none;
+    border-radius: 12px;
+    color:white;
+     width: 60px;
+     height: 20px;
+     float: right;
+     
+     
+}
+.lbl-receita {
     background-color: rebeccapurple;
+    list-style: none;
     border-radius: 12px;
     color:white;
      width: 60px;
@@ -121,10 +152,20 @@
 }
 
 .icons:hover{
-    background-color:#f5f5f5;
+    background-color: #c0c0c0;
     box-shadow: 1px 1px  0 #c4c4c4;
     border-radius: 30px;
 }
+
+
+.icon-color{
+    margin-left: 12px;
+    margin-right: 12px;
+     width:20px;
+    height: 20px;
+    border-radius: 12px;
+}
+
 
 
 
