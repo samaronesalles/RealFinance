@@ -143,7 +143,7 @@ module.exports = {
         }
     },
 
-    async atualizarCategoria(req, res) {                                      // Testado: 
+    async atualizarCategoria(req, res) {                                      // Testado: OK
         console.log('chegou em "Controllers>CategoriasController.atualizarCategoria"');
 
         try {

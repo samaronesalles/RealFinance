@@ -31,7 +31,7 @@ function totalEmLancamentos(req, res) {
 
     // dsfdsfsdf
 
-    const valorTotal = 10.4; // retornar total(em R$) de lançamentos feitos para esta categaria ( id )
+    const valorTotal = 0.0; // retornar total(em R$) de lançamentos feitos para esta categaria ( id )
 
     return valorTotal;
 }
