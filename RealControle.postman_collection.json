@@ -303,7 +303,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n\t\"nome\": \"reste 3333\",\n\t\"descricao\" : \"fffffffffffffffffffffquer\",\n\t\"cor\" : \"black\",\n\t\"tipo\" : \"1\"\n}",
+							"raw": "{\n\t\"nome\": \"reste 3333\",\n\t\"descricao\" : \"fffftest emerge quer\",\n\t\"cor\" : \"black\",\n\t\"tipo\" : \"1\"\n}",
 							"options": {
 								"raw": {
 									"language": "json"
