@@ -1,6 +1,6 @@
 .item-category{
     text-align: center;
-    width: 320px;
+     width: 450px;
     height: 150px;
     margin:20px;
     background-color: #ffffff;
@@ -38,13 +38,25 @@
     text-align:start;
     
 }
+ .f-title{
+    color: grey;
+    //font-family: 'Quicksand', sans-serif; 
+    font-family: 'Maven Pro', sans-serif;
+    font-size: 100%;
+}
+
+.icon-color-card{
+    margin-left: 12px;
+    margin-right: 12px;
+    width:20px;
+    height: 20px;
+    border-radius: 12px;
+}
 
 .card-actions{
     float: right;
     width: 40%;
     height: 100%;
- 
-  
 }
 
 .item-category .card-info{
@@ -56,11 +68,9 @@
 }
 
 .col-desc{
-
     float: left;
     width: 60%;
     height: 100%;
-    
 }
 
 
@@ -72,12 +82,10 @@
 
 
 //fonts
-.f-title{
-    color: grey;
-    //font-family: 'Quicksand', sans-serif; 
-    font-family: 'Maven Pro', sans-serif;
-    font-size: 100%;
-}
+
+
+
+
 
 .f-desc{
     color: grey;
@@ -112,7 +120,6 @@
 
 
 
-
 // TESTE
 .lbl-tipo{
     list-style: none;
@@ -125,7 +132,7 @@
 }
 
  .lbl-despesa {
-    background-color: #228b22;
+    background-color:rebeccapurple ;
     list-style: none;
     border-radius: 12px;
     color:white;
@@ -136,7 +143,7 @@
      
 }
 .lbl-receita {
-    background-color: rebeccapurple;
+    background-color: #006600 ;
     list-style: none;
     border-radius: 12px;
     color:white;
@@ -148,7 +155,7 @@
 
 .icons {
     float:right;
-    width: 22px;
+    width: 28px;
 }
 
 .icons:hover{
@@ -156,16 +163,5 @@
     box-shadow: 1px 1px  0 #c4c4c4;
     border-radius: 30px;
 }
-
-
-.icon-color{
-    margin-left: 12px;
-    margin-right: 12px;
-     width:20px;
-    height: 20px;
-    border-radius: 12px;
-}
-
-
 
 

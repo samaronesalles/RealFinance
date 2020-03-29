@@ -29,7 +29,7 @@
                     <div id="radio" class="row">
                         <div class="col-sm-4" *ngFor="let item of categoryTypes">
                             <label class="radio-inline">
-                                <input id="tipo" type="radio" [value]="item.valor" formControlName="tipo"
+                                <input id="tipo" type="radio"  [value]="item.valor" formControlName="tipo"
                                     name="tipo" />{{item.desc}}
                             </label>
                         </div>
@@ -42,9 +42,9 @@
             </form>
 
             <div>
-                <div class="col-md-4 mb-3">
-                    <button (click)="onSubmit()" type="submit" class="btn btn-lg btn-success">Salvar</button>
-                    <button type="button" [routerLink]="['/categories']" class="btn btn-default">Cancelar</button>
+                <div class="col-md-4 mb-3 div-actions">
+                    <button (click)="onSubmit()" type="submit" class="btn btn-success btn-actions">Salvar</button>
+                    <button type="button" [routerLink]="['/categories']" class="btn btn-outline-dark">Cancelar</button>
                 </div>
             </div>
         </div>

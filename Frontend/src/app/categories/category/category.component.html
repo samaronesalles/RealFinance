@@ -1,14 +1,14 @@
 <div class="item-category pdd-lg item">
     <div class="card-header">
       <div class="card-title f-title row">
-        <div class="icon-color" [style.background-color]="category.cor"></div>
+        <div class="icon-color-card" [style.background-color]="category.cor"></div>
         <div>{{category.nome}}</div>
         </div>
       <div class="card-actions">
            <a class="icons item"><img src="assets/img/icon-delete.png" (click)="delete(category.id)"  title="Delete" width="10px"  height="10px"></a>
            <a class="icons item"><img src="assets/img/icon-edit2.png"  title="Edit"   width="20px" height="20px" (click) ="onEdit(category.id)">
            </a> 
-           <a  class="f-desc lbl-receita" name="tipo">{{category.tipo}}</a>  
+           <a  class="f-desc" [ngClass]="{'lbl-despesa': category.tipo =='Despesa','lbl-receita': category.tipo == 'Receita'}"  name="tipo">{{category.tipo}}</a>  
       </div>
    </div>
    <div class="card-info border-top">

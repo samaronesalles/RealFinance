@@ -46,6 +46,36 @@ export class CategoryFormComponent implements OnInit {
   }
 
 
+  loadRadioButton(tipo){
+    if(tipo == 'despesa'){
+      this.categoryTypes = [
+        {
+          valor:'despesa',
+          value: true,
+          desc:'Despesa'
+        },
+        {
+          valor:'receita',
+          value: false,
+          desc:'Receita'
+        }
+      ];
+    }else{
+      this.categoryTypes = [
+        {
+          valor:'despesa',
+          value: false,
+          desc:'Despesa'
+        },
+        {
+          valor:'receita',
+          value: true,
+          desc:'Receita'
+        }
+      ];
+    }
+  }
+
   onSubmit() {
     this.submitted = true;
     console.log(this.form.value)
