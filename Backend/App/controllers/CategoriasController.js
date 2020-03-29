@@ -1,7 +1,7 @@
 const CheckCat = require('./validacoes/categorias');
 const Categoria = require('../models/CategoriasModel');
 const Utils = require('../Utils/functions');
-const atributos_Contegorias = ['id', 'nome', 'descricao', 'cor'];
+const atributos_Contegorias = ['id', 'nome', 'descricao', 'cor', 'receita_ou_despesa'];
 
 module.exports = {
 
@@ -10,18 +10,22 @@ module.exports = {
         console.log('chegou em "Controllers>CategoriasController.novaCategoria"');
 
         try {
-            const { nome, tipo } = req.body;
+            let { nome, tipo } = req.body;
 
             CheckCat.CamposObrigatorios(req, res);
 
-            const cat_temp = await Categoria.findOne({ where: { nome: nome, receita_ou_despesa: Utils.RecDespToInt(tipo) } });
+            if ((tipo != 0) && (tipo != 1)) {
+                tipo = Utils.RecDespToInt(tipo);
+            }
+
+            const cat_temp = await Categoria.findOne({ where: { nome: nome, receita_ou_despesa: tipo } });
 
             if (cat_temp) {
                 throw new Error(`Categoria '${nome}' já cadastrada para o tipo '${tipo}'.`);
             }
 
             // Criando categoria no banco de dados
-            const tipoConvertido = Utils.RecDespToInt(req.body['tipo']);
+            const tipoConvertido = tipo;//Utils.RecDespToInt(req.body['tipo']);
             delete tipoConvertido['tipo'];
 
             req.body['receita_ou_despesa'] = tipoConvertido;
@@ -31,9 +35,9 @@ module.exports = {
             // sempre que criar uma nova categoria, em caso de sucesso, o retornaremos com todos os dados.
             novaCategoria = await Categoria.findByPk(novaCategoria.id, { atributes: atributos_Contegorias });
 
-            novaCategoria.dataValues['tipo'] = Utils.IntToRecDesp(novaCategoria.dataValues['receita_ou_despesa']);
+            novaCategoria.dataValues['receita_ou_despesa_desc'] = Utils.IntToRecDesp(novaCategoria.dataValues['receita_ou_despesa']);
 
-            delete novaCategoria.dataValues.receita_ou_despesa;
+            //delete novaCategoria.dataValues.receita_ou_despesa;
             delete novaCategoria.dataValues.createdAt;
             delete novaCategoria.dataValues.updatedAt;
 
@@ -56,11 +60,11 @@ module.exports = {
                 categorias.map((item) => {
                     const i = item.dataValues["receita_ou_despesa"];
 
-                    delete item.dataValues.receita_ou_despesa;
+                    //delete item.dataValues.receita_ou_despesa;
                     delete item.dataValues.createdAt;
                     delete item.dataValues.updatedAt;
 
-                    item.dataValues["tipo"] = Utils.IntToRecDesp(i);
+                    item.dataValues["receita_ou_despesa_desc"] = Utils.IntToRecDesp(i);
                 });
             }
 
@@ -91,11 +95,11 @@ module.exports = {
             if (categoria) {
                 const i = categoria.dataValues["receita_ou_despesa"];
 
-                delete categoria.dataValues.receita_ou_despesa;
+                //delete categoria.dataValues.receita_ou_despesa;
                 delete categoria.dataValues.createdAt;
                 delete categoria.dataValues.updatedAt;
 
-                categoria.dataValues["tipo"] = Utils.IntToRecDesp(i);
+                categoria.dataValues["receita_ou_despesa_desc"] = Utils.IntToRecDesp(i);
             }
 
             return res.json(categoria);
@@ -158,7 +162,12 @@ module.exports = {
                 throw new Error(`Categoria id '${id}' não encontrada no cadastro.`);
             }
 
-            const tipoConvertido = Utils.RecDespToInt(req.body['tipo']);
+            let tipo = req.body.tipo;
+            if ((req.body.tipo != 0) && (req.body.tipo != 1)) {
+                tipo = Utils.RecDespToInt(tipo);
+            }
+
+            const tipoConvertido = tipo; //Utils.RecDespToInt(req.body['tipo']);
             delete tipoConvertido['tipo'];
 
             req.body['receita_ou_despesa'] = tipoConvertido;
@@ -171,9 +180,9 @@ module.exports = {
                 plain: true
             });
 
-            categoria.dataValues['tipo'] = Utils.IntToRecDesp(categoria.dataValues['receita_ou_despesa']);
+            categoria.dataValues['receita_ou_despesa_desc'] = Utils.IntToRecDesp(categoria.dataValues['receita_ou_despesa']);
 
-            delete categoria.dataValues.receita_ou_despesa;
+            //delete categoria.dataValues.receita_ou_despesa;
             delete categoria.dataValues.createdAt;
             delete categoria.dataValues.updatedAt;
 

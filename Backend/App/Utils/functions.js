@@ -10,10 +10,10 @@ function tipoBD_Receita(tipo) {
 
 function RecDespToInt(tipo) {
 
-    if (tipo.charAt(0) == 'd')
+    if (tipo.toUpperCase().charAt(0) == 'D')
         return 0;
 
-    if (tipo.charAt(0) == 'r')
+    if (tipo.toUpperCase().charAt(0) == 'R')
         return 1;
 
     return -1;

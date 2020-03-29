@@ -16,8 +16,10 @@ function CamposObrigatorios(req, res) {
         throw new Error("campo 'tipo' é obrigatório.");
     }
 
-    if ((req.body.tipo != 'despesa') && (req.body.tipo != 'receita')) {
-        throw new Error("campo 'tipo' deve ser apenas 'despesa' ou 'receita'.");
+    if ((req.body.tipo != 0) && (req.body.tipo != 1)) {
+        if ((req.body.tipo.toUpperCase() != 'DESPESA') && (req.body.tipo.toUpperCase() != 'RECEITA')) {
+            throw new Error("campo 'tipo' deve ser apenas 'despesa' ou 'receita'.");
+        }
     }
 
 }
@@ -27,7 +29,9 @@ function totalEmLancamentos(req, res) {
     // Quando tiver tabela de lançamentos financeiros... Implementar esta função.
     const { id } = req.params;
 
-    const valorTotal = 0.0; // retornar total(em R$) de lançamentos feitos para esta categaria ( id )
+    // dsfdsfsdf
+
+    const valorTotal = 10.4; // retornar total(em R$) de lançamentos feitos para esta categaria ( id )
 
     return valorTotal;
 }
