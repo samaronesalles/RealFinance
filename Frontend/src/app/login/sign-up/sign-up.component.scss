@@ -1,18 +1,19 @@
 .texto {
-  font-family: "Poppins", sans-serif;
+  font-family: 'Quicksand', sans-serif;
   font-size: 20px;
-  width: 600px;
-  color: grey;
-  margin-left: 30px;
-}
-
-.content {
-  margin: 10% auto;
-  text-align: center;
+  margin-top: 50px;
 }
 
 .btn {
   text-align: center;
   background-color: rgb(15, 109, 15);
   border-color: rgb(15, 109, 15);
+}
+
+.text-info {
+  color: grey !important;
+}
+
+.msg-erro {
+  color: red;
 }

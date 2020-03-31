@@ -1,28 +1,29 @@
 <section class="header">
   <div class="opcoes-header">
-      <div class="logo-header">
-        <a href="#">
-            <img src="assets/img/iconeRealControle.png" width="30" height="30" alt="">
-            <span><b>REAL</b>CONTROLE</span>
-        </a>
+    <div class="logo-header">
+      <a href="#">
+        <img src="assets/img/iconeRealControle.png" width="30" height="30" alt="">
+        <span><b>REAL</b>CONTROLE</span>
+      </a>          
     </div>
-    <div class="menu-header">
-            <ul class="nav justify-content-end">
-                <li class="nav-item">
-                  <a class="nav-link" href="#">Home</a>
-                </li>
-                <li class="nav-item">
-                  <a class="nav-link" [routerLink]="['/categories']">Sobre</a>
-                </li>
-                <li class="nav-item">
-                  <a class="nav-link"[routerLink]="['/sign-up']">Cadastrar</a>
-                </li>
         
-                <li class="nav-item">
-                  <button class="btnEntrar" [routerLink]="['/sign-in']">Entrar</button>
-                </li>
-              </ul>
+    <div class="menu-header">
+      <ul class="nav justify-content-end">
+        <li class="nav-item">
+          <a class="nav-link" href="#">Home</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" [routerLink]="['/categories']">Sobre</a>
+        </li>
+        <li *ngIf="!isLogged" class="nav-item" class="btn-entrar">
+          <button class="btnEntrar" [routerLink]="['/sign-in']">Entrar</button>
+        </li>        
+        <li *ngIf="isLogged" class="nav-item">
+          <a class="nav-link" href="#">Log Out</a>
+        </li>
+      </ul>
+      
     </div>
   </div>
-   
+
 </section>
