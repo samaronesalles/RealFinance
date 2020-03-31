@@ -1,6 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
-import { LoggedService } from '../logged/logged.service';
-import { Router } from '@angular/router';
+import { Component, OnInit, Input, } from '@angular/core';
 
 @Component({
   selector: 'app-header',
@@ -9,23 +7,12 @@ import { Router } from '@angular/router';
 })
 export class HeaderComponent implements OnInit {
 
+  constructor() { }
 
-  constructor(private loggedService: LoggedService, private router: Router) { }
-
-  welcomeMessage: string;
+  @Input() user;
 
   ngOnInit(): void {
-    this.isLogged();
-  }
-
-  async isLogged() {
-    try {
-      const user = await this.loggedService.isLogged();
-      this.welcomeMessage = 'Olá, ' + user.nome;
-      return true;
-    } catch (err) {
-      return false;
-    }
+    console.log("user tal:" + this.user);
   }
 
 }

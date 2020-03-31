@@ -4,9 +4,9 @@
       <a href="#">
         <img src="assets/img/iconeRealControle.png" width="30" height="30" alt="">
         <span><b>REAL</b>CONTROLE</span>
-      </a>          
+      </a>
     </div>
-        
+
     <div class="menu-header">
       <ul class="nav justify-content-end">
         <li class="nav-item">
@@ -15,14 +15,14 @@
         <li class="nav-item">
           <a class="nav-link" [routerLink]="['/categories']">Sobre</a>
         </li>
-        <li *ngIf="!isLogged" class="nav-item" class="btn-entrar">
+        <li *ngIf="!user" class="nav-item" class="btn-entrar">
           <button class="btnEntrar" [routerLink]="['/sign-in']">Entrar</button>
-        </li>        
-        <li *ngIf="isLogged" class="nav-item">
+        </li>
+        <li *ngIf="user" class="nav-item">
           <a class="nav-link" href="#">Log Out</a>
         </li>
       </ul>
-      
+
     </div>
   </div>
 

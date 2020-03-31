@@ -27,7 +27,7 @@ import { CategoryFormComponent } from './categories/category-form/category-form.
     HomeComponent,
     CategoriesComponent,
     CategoryComponent,
-    CategoryFormComponent
+    CategoryFormComponent,
   ],
   imports: [
     BrowserModule,
