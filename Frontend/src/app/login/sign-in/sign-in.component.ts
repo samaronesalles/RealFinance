@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { LoginService } from '../login.service';
+import { LoginService } from '../../login.service';
 import { Router } from '@angular/router';
 import { User } from '../user.model';
 
@@ -21,7 +21,7 @@ export class SignInComponent implements OnInit {
   async autenticateUser(user: User) {
     try {
       const response = await this.loginservice.autenticateUser(user);
-      this.router.navigate(['/logged']);
+      this.router.navigate(['/categories']);
     } catch (err) {
       this.errorMessage = err.response.data.error;
     }

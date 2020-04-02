@@ -1,26 +1,40 @@
-<section class="content">
-  <div class="col-xs-12 col-sm-offset-3 col-sm-6 login-box-body">   
-    <p class="texto">Por favor, efetue o login para continuar</p>
-    <form #form="ngForm" novalidate>
-      <div class="form-group has-feedback">
-        <input type="email" name="email" #iptemail="ngModel"
-          pattern='^(([^<>()\[\]\.,;:\s@\"]+(\.[^<>()\[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$'
-          required ngModel class="form-control" placeholder="Email">
-        <span class="glyphicon glyphicon-envelope form-control-feedback"></span>
-      </div>
-      <div class="form-group has-feedback">
-        <input type="password" name="password" minlength="5" required ngModel class="form-control" placeholder="Senha">
-        <span class="glyphicon glyphicon-lock form-control-feedback"></span>
-      </div>
-      <div class="row">
-        <div class="col-xs-offset-8 col-xs-4">
-          <button type="submit" class="btn btn-success btn-block btn-flat" (click)="autenticateUser(form.value)"
-            [disabled]="!form.valid">Entrar</button>
+<section class="texto">
+  <div id="login">
+    <h3 class="text-center text-white pt-5"> </h3>
+    <div class="container">
+      <div id="login-row" class="row justify-content-center align-items-center">
+        <div id="login-column" class="col-md-6">
+          <div id="login-box" class="col-md-12">
+            <form #form="ngForm" novalidate>
+              <h3 class="text-center text-info">Por favor, efetue o login para continuar</h3>
+              <div class="form-group">
+                <label for="username" class="text-info">E-mail</label><br>
+                <input type="email" name="email" #iptemail="ngModel"
+                  pattern='^(([^<>()\[\]\.,;:\s@\"]+(\.[^<>()\[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$'
+                  required ngModel class="form-control">
+              </div>
+              <div class="form-group">
+                <label for="password" class="text-info">Senha</label><br>
+                <input type="password" name="password" minlength="5" required ngModel class="form-control">
+              </div>
+              <div class="msg-erro">
+                {{errorMessage}}
+              </div>
+              <div class="form-group">
+                <label for="remember-me" class="text-info"><span></span> <span><input id="remember-me"
+                      name="remember-me" type="checkbox"></span></label> Continuar conectado<br>
+              </div>
+              <div id="register-link" class="text-right">
+                <button type="submit" class="btn btn-success btn-block btn-flat" (click)="autenticateUser(form.value)"
+                  [disabled]="!form.valid">Entrar</button>
+              </div>
+              <div id="register-link" class="text-right" class="register" style="margin-top: 20px;">
+                Ainda não tem uma conta? <a [routerLink]="['/sign-up']" class="text-info">Cadastre-se</a>
+            </div>
+            </form>
+          </div>
         </div>
-        <div>
-          {{errorMessage}}
-        </div>
       </div>
-    </form>
+    </div>
   </div>
 </section>
