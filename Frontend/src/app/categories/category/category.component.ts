@@ -20,13 +20,12 @@ export class CategoryComponent implements OnInit {
 
   async delete(id: number){
     try{
-      console.log("deletando categoria")
       const response = this.service.deteleCategory(id).then(sucess => {"Categoria apagada com sucesso!"},error =>{
         console.log(response)
       }
       );
-      this.messageReturn="Categoria apagada com sucesso!"
-      //this.load();
+     // this.messageReturn="Categoria apagada com sucesso!"
+       this.load();
     }catch(err){
       this.messageReturn = err.response.data.error;
     }
