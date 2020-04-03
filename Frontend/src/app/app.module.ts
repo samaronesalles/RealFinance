@@ -29,10 +29,7 @@ import { ModalComponent } from './shared/modal/modal.component';
     CategoriesComponent,
     CategoryComponent,
     CategoryFormComponent,
-<<<<<<< HEAD
     ModalComponent
-=======
->>>>>>> ca55600b5473101e8e49e8df746ec18bd6cdea40
   ],
   imports: [
     BrowserModule,
