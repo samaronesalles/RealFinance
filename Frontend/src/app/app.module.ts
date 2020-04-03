@@ -4,9 +4,9 @@ import { NgModule } from '@angular/core';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { LoginComponent } from './login/login.component';
-import { LoginService } from './login/login.service';
+import { LoginService } from './login.service';
 import { HttpModule } from '@angular/http';
-import {FormsModule, ReactiveFormsModule} from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { SignInComponent } from './login/sign-in/sign-in.component';
 import { SignUpComponent } from './login/sign-up/sign-up.component';
 import { HeaderComponent } from './header/header.component';
@@ -29,7 +29,10 @@ import { ModalComponent } from './shared/modal/modal.component';
     CategoriesComponent,
     CategoryComponent,
     CategoryFormComponent,
+<<<<<<< HEAD
     ModalComponent
+=======
+>>>>>>> ca55600b5473101e8e49e8df746ec18bd6cdea40
   ],
   imports: [
     BrowserModule,
@@ -37,7 +40,7 @@ import { ModalComponent } from './shared/modal/modal.component';
     HttpModule,
     ReactiveFormsModule,
     FormsModule
-   
+
   ],
   providers: [LoginService],
   bootstrap: [AppComponent]
