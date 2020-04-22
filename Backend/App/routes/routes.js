@@ -4,6 +4,7 @@ const routes = express.Router();
 // Controllers
 const userController = require('../controllers/UsuariosController');
 const CatController = require('../controllers/CategoriasController');
+const lctoController = require('../controllers/LctosController');
 const auth = require('./middleware/auth');
 
 // Usuários
@@ -21,5 +22,8 @@ routes.get('/cats', CatController.listaCategorias);                             
 routes.get('/cats/:id', CatController.dadosCategoria);                                         // Testado: OK
 routes.delete('/cats/:id', CatController.deleteCategoria);                                     // Testado: OK
 routes.put('/cats/:id', CatController.atualizarCategoria);                                     // Testado: OK
+
+// Lançamentos
+routes.post('/novoLcto', lctoController.novoLancamento);                                       // Testado: OK
 
 module.exports = routes;

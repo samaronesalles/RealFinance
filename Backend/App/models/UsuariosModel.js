@@ -12,6 +12,11 @@ class Usuario extends Model {
         })
     }
 
+    static associate(models) {
+        this.hasMany(models.Categoria);
+        this.hasMany(models.Lancamento);
+    }
+
 }
 
 module.exports = Usuario;

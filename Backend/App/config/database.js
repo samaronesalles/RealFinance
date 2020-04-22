@@ -1,6 +1,6 @@
 module.exports = {
-    username: 'willi',
-    password: '',
+    username: 'root',
+    password: 'h12l99',
     database: 'realcontrole',
     host: '127.0.0.1',
     dialect: 'mysql',

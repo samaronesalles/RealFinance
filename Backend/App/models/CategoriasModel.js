@@ -9,10 +9,14 @@ class Categoria extends Model {
             cor: DataTypes.STRING,
             receita_ou_despesa: DataTypes.INTEGER,
         }, {
-            //freezeTableName: false,
             tableName: 'categorias',
             sequelize
         })
+    }
+
+    static associate(models) {
+        this.belongsTo(models.Usuario, { foreignKey: 'usuario_id' });
+        this.hasMany(models.Lancamento);
     }
 
 }

@@ -1,6 +1,8 @@
 const CheckCat = require('./validacoes/categorias');
 const Categoria = require('../models/CategoriasModel');
+const Usuario = require('../models/UsuariosModel');
 const Utils = require('../Utils/functions');
+const auth = require('../routes/middleware/auth');
 const atributos_Contegorias = ['id', 'nome', 'descricao', 'cor', 'receita_ou_despesa'];
 
 module.exports = {
@@ -10,6 +12,8 @@ module.exports = {
         console.log('chegou em "Controllers>CategoriasController.novaCategoria"');
 
         try {
+            auth.isLogged(req, res);
+
             let { nome, tipo } = req.body;
 
             CheckCat.CamposObrigatorios(req, res);
@@ -29,11 +33,20 @@ module.exports = {
             delete tipoConvertido['tipo'];
 
             req.body['receita_ou_despesa'] = tipoConvertido;
+            req.body['usuario_id'] = req.session.user.id;
 
             let novaCategoria = await Categoria.create(req.body);
 
             // sempre que criar uma nova categoria, em caso de sucesso, o retornaremos com todos os dados.
-            novaCategoria = await Categoria.findByPk(novaCategoria.id, { atributes: atributos_Contegorias });
+            novaCategoria = await Categoria.findByPk(novaCategoria.id, {
+                atributes: atributos_Contegorias,
+                include: [
+                    {
+                        model: Usuario,
+                        attributes: ['id', 'nome']
+                    },
+                ]
+            });
 
             novaCategoria.dataValues['receita_ou_despesa_desc'] = Utils.IntToRecDesp(novaCategoria.dataValues['receita_ou_despesa']);
 
@@ -53,8 +66,17 @@ module.exports = {
         console.log('chegou em "Controllers>CategoriasController.listaCategorias"');
 
         try {
+            auth.isLogged(req, res);
 
-            let categorias = await Categoria.findAll({ atributes: atributos_Contegorias });
+            let categorias = await Categoria.findAll({
+                atributes: atributos_Contegorias,
+                include: [
+                    {
+                        model: Usuario,
+                        attributes: ['id', 'nome']
+                    },
+                ]
+            });
 
             if (categorias) {
                 categorias.map((item) => {
@@ -79,6 +101,7 @@ module.exports = {
         console.log('chegou em "Controllers>CategoriasController.dadosCategoria"');
 
         try {
+            auth.isLogged(req, res);
 
             const { id } = req.params;
 
@@ -86,7 +109,15 @@ module.exports = {
                 throw new Error('É obrigatório informar o id da categoria');
             }
 
-            let categoria = await Categoria.findByPk(id, { atributes: atributos_Contegorias });
+            let categoria = await Categoria.findByPk(id, {
+                atributes: atributos_Contegorias,
+                include: [
+                    {
+                        model: Usuario,
+                        attributes: ['id', 'nome']
+                    },
+                ]
+            });
 
             if (!categoria) {
                 throw new Error(`Categoria id '${id}' não encontrada no cadastro.`);
@@ -113,6 +144,7 @@ module.exports = {
         console.log('chegou em "Controllers>CategoriasController.deleteCategoria"');
 
         try {
+            auth.isLogged(req, res);
 
             const { id } = req.params;
 
@@ -143,11 +175,11 @@ module.exports = {
         }
     },
 
-    async atualizarCategoria(req, res) {                                      // Testado: 
+    async atualizarCategoria(req, res) {                                      // Testado: OK
         console.log('chegou em "Controllers>CategoriasController.atualizarCategoria"');
 
         try {
-
+            auth.isLogged(req, res);
             const { id } = req.params;
 
             if (!id) {
