@@ -175,7 +175,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n\t\"email\" : \"samaronesalles@gmail.com\",\n\t\"senha\" : \"12345\"\n}",
+							"raw": "{\n\t\"email\" : \"samaronesalles@gmail.com\",\n\t\"senha\" : \"123\"\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -216,7 +216,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n\t\"nome\": \"teste 5\",\n\t\"descricao\" : \"eeeeeeeeeeeeeeeeeana\",\n\t\"cor\" : \"Green\",\n\t\"tipo\" : 0\n}",
+							"raw": "{\n\t\"nome\": \"samamamama\",\n\t\"descricao\" : \"eererer aeraer\",\n\t\"cor\" : \"Green\",\n\t\"tipo\" : 0\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -320,6 +320,40 @@
 								"api",
 								"cats",
 								"5"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "Lançamentos financeiros",
+			"item": [
+				{
+					"name": "novo",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"categoria_id\" : 1,\n\t\"usuario_id\" : 1,\n\t\"descricao\" : \"Ref. a pagamento de conta de luz (CEMIG)\",\n\t\"valor\" : 360.40,\n\t\"data_vencimento\" : \"10/05/2020\",\n\t\"data_pagamento\" : \"05/05/2020\",\n\t\"ja_pago\" : true,\n\t\"lancamento_fixo\" : true\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:3000/api/novoLcto",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"novoLcto"
 							]
 						}
 					},
