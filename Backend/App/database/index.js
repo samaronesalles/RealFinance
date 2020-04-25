@@ -5,6 +5,7 @@ const dbConfig = require('../config/database');
 const Usuario = require('../models/UsuariosModel');
 const Categoria = require('../models/CategoriasModel');
 const Lancamento = require('../models/LctosModel');
+const LancamentoFixo = require('../models/LctosFixosModel');
 
 // criando conexão com o banco de dados...
 const connection = new Sequelize(dbConfig);
@@ -13,8 +14,10 @@ const connection = new Sequelize(dbConfig);
 Usuario.init(connection);
 Categoria.init(connection);
 Lancamento.init(connection);
+LancamentoFixo.init(connection);
 
 Categoria.associate(connection.models);
 Lancamento.associate(connection.models);
+LancamentoFixo.associate(connection.models);
 
 module.exports = connection;

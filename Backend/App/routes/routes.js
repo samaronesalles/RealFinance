@@ -20,8 +20,10 @@ routes.get('/auth', auth.isLogged, userController.auth);
 routes.post('/cats', CatController.novaCategoria);                                             // Testado: OK
 routes.get('/cats', CatController.listaCategorias);                                            // Testado: OK
 routes.get('/cats/:id', CatController.dadosCategoria);                                         // Testado: OK
+routes.get('/catsComLctos/:id', CatController.dadosCategoriaComLctos);                         // Testado: OK
 routes.delete('/cats/:id', CatController.deleteCategoria);                                     // Testado: OK
 routes.put('/cats/:id', CatController.atualizarCategoria);                                     // Testado: OK
+routes.get('/catsTotLcto/:id', CatController.TotalLancadoCategoria);                           // Testado: OK
 
 // Lançamentos
 routes.post('/novoLcto', lctoController.novoLancamento);                                       // Testado: OK

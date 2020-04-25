@@ -1,9 +1,12 @@
+const sequelize = require('sequelize');
 const CheckCat = require('./validacoes/categorias');
 const Categoria = require('../models/CategoriasModel');
 const Usuario = require('../models/UsuariosModel');
+const Lancamento = require('../models/LctosModel');
 const Utils = require('../Utils/functions');
 const auth = require('../routes/middleware/auth');
 const atributos_Contegorias = ['id', 'nome', 'descricao', 'cor', 'receita_ou_despesa'];
+const atributos_lctos = ['id', 'descricao', 'valor', 'data_vencimento', 'data_pagamento', 'ja_pago'];
 
 module.exports = {
 
@@ -75,6 +78,10 @@ module.exports = {
                         model: Usuario,
                         attributes: ['id', 'nome']
                     },
+                    {
+                        model: Lancamento,
+                        attributes: [[sequelize.fn('sum', sequelize.col('valor')), 'Total_Lctos']]
+                    }
                 ]
             });
 
@@ -131,6 +138,55 @@ module.exports = {
                 delete categoria.dataValues.updatedAt;
 
                 categoria.dataValues["receita_ou_despesa_desc"] = Utils.IntToRecDesp(i);
+                categoria.dataValues["total_lancamentos"] = await CheckCat.totalEmLancamentos(id);
+            }
+
+            return res.json(categoria);
+
+        } catch (error) {
+            return res.status(400).json({ error: error.message });
+        }
+    },
+
+    async dadosCategoriaComLctos(req, res) {                                  // Testado: OK
+        console.log('chegou em "Controllers>CategoriasController.dadosCategoria"');
+
+        try {
+            auth.isLogged(req, res);
+
+            const { id } = req.params;
+
+            if (!id) {
+                throw new Error('É obrigatório informar o id da categoria');
+            }
+
+            let categoria = await Categoria.findByPk(id, {
+                atributes: atributos_Contegorias,
+                include: [
+                    {
+                        model: Usuario,
+                        attributes: ['id', 'nome']
+                    },
+                    {
+                        model: Lancamento,
+                        attributes: atributos_lctos,
+                    },
+                ],
+
+            });
+
+            if (!categoria) {
+                throw new Error(`Categoria id '${id}' não encontrada no cadastro.`);
+            }
+
+            if (categoria) {
+                const i = categoria.dataValues["receita_ou_despesa"];
+
+                //delete categoria.dataValues.receita_ou_despesa;
+                delete categoria.dataValues.createdAt;
+                delete categoria.dataValues.updatedAt;
+
+                categoria.dataValues["receita_ou_despesa_desc"] = Utils.IntToRecDesp(i);
             }
 
             return res.json(categoria);
@@ -158,7 +214,7 @@ module.exports = {
                 throw new Error(`Categoria id '${id}' não encontrada no cadastro.`);
             }
 
-            if (CheckCat.totalEmLancamentos(req, res) > 0.0) {
+            if (await CheckCat.totalEmLancamentos(id) > 0.0) {
                 throw new Error(`Categoria id '${id}' não pode ser excluída, por possuir lançamentos financeiros vinculados a ela.`);
             }
 
@@ -219,6 +275,27 @@ module.exports = {
             delete categoria.dataValues.updatedAt;
 
             return res.json(categoria);
+
+        } catch (error) {
+            return res.status(400).json({ error: error.message });
+        }
+    },
+
+    async TotalLancadoCategoria(req, res) {                                   // Testado: OK
+        console.log('chegou em "Controllers>CategoriasController.TotalLancadoCategoria"');
+
+        try {
+            auth.isLogged(req, res);
+
+            const { id } = req.params;
+
+            if (!id) {
+                throw new Error('É obrigatório informar o id da categoria');
+            }
+
+            const valor = await CheckCat.totalEmLancamentos(id);
+
+            return res.json(valor);
 
         } catch (error) {
             return res.status(400).json({ error: error.message });

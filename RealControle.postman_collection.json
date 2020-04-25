@@ -238,6 +238,26 @@
 					"response": []
 				},
 				{
+					"name": "Retorna categoria",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:3000/api/cats/7",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"cats",
+								"7"
+							]
+						}
+					},
+					"response": []
+				},
+				{
 					"name": "Retornar todas",
 					"request": {
 						"method": "GET",
@@ -257,20 +277,20 @@
 					"response": []
 				},
 				{
-					"name": "Retorna categoria",
+					"name": "Retorna todas com lançamentos",
 					"request": {
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "localhost:3000/api/cats/7",
+							"raw": "localhost:3000/api/catsComLctos/9",
 							"host": [
 								"localhost"
 							],
 							"port": "3000",
 							"path": [
 								"api",
-								"cats",
-								"7"
+								"catsComLctos",
+								"9"
 							]
 						}
 					},
@@ -324,6 +344,26 @@
 						}
 					},
 					"response": []
+				},
+				{
+					"name": "Total lançado",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:3000/api/catsTotLcto/9",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"catsTotLcto",
+								"9"
+							]
+						}
+					},
+					"response": []
 				}
 			],
 			"protocolProfileBehavior": {}
@@ -338,7 +378,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n\t\"categoria_id\" : 1,\n\t\"usuario_id\" : 1,\n\t\"descricao\" : \"Ref. a pagamento de conta de luz (CEMIG)\",\n\t\"valor\" : 360.40,\n\t\"data_vencimento\" : \"10/05/2020\",\n\t\"data_pagamento\" : \"05/05/2020\",\n\t\"ja_pago\" : true,\n\t\"lancamento_fixo\" : true\n}",
+							"raw": "{\n\t\"categoria_id\" : 9,\n\t\"descricao\" : \"Ref. a pagamento de conta de luz (CEMIG)\",\n\t\"valor\" : 360.40,\n\t\"data_vencimento\" : \"10/05/2020\",\n\t\"data_pagamento\" : \"05/05/2020\",\n\t\"ja_pago\" : true,\n\t\"lancamento_fixo\" : true\n}",
 							"options": {
 								"raw": {
 									"language": "json"
