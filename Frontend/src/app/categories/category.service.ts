@@ -13,22 +13,16 @@ import { of } from 'rxjs';
     constructor() { }
 
     async createNewCategory(category:Category){
-  
-        const response = await API.post('/cats',{
-          nome: category.nome,
-          descricao : category.descricao,
-          cor : category.cor,
-          tipo: category.tipo
-        });
-
+        const response = await API.post('/cats',category);
         return response.data;
     }
 
 
     getOptionsRadio(){
       return [
-        {valor:'receita', desc:'Receita'},
-        {valor:'despesa', desc:'Despesa'}
+        {valor:0, desc:'Despesa'},
+        {valor:1, desc:'Receita'}
+        
       ]
     }
 
@@ -49,7 +43,8 @@ import { of } from 'rxjs';
       return response.data;
     }
 
-    async udpate(category: Category){
+    async udpate(category: any){
+      
       const response = await API.put('/cats/'+ category.id,{
         nome: category.nome,
         descricao: category.descricao,

@@ -3,7 +3,7 @@ export interface Category{
     nome: string,
     descricao?: string,
     cor: string,
-    tipo: string,
-
+    receita_ou_despesa: number,
+    receita_ou_despesa_desc: string
 }
 

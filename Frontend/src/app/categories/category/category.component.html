@@ -8,7 +8,7 @@
            <a class="icons item"><img src="assets/img/icon-delete.png" (click)="delete(category.id)"  title="Delete" width="10px"  height="10px"></a>
            <a class="icons item"><img src="assets/img/icon-edit2.png"  title="Edit"   width="20px" height="20px" (click) ="onEdit(category.id)">
            </a> 
-           <a  class="f-desc" [ngClass]="{'lbl-despesa': category.tipo =='Despesa','lbl-receita': category.tipo == 'Receita'}"  name="tipo">{{category.tipo}}</a>  
+           <a  class="f-desc"  [ngClass]="{'lbl-despesa': category.receita_ou_despesa_desc =='Despesa','lbl-receita': category.receita_ou_despesa_desc == 'Receita'}"  name="receita_ou_despesa_desc">{{category.receita_ou_despesa_desc}}</a>  
       </div>
    </div>
    <div class="card-info border-top">
