@@ -1,4 +1,7 @@
-function CamposObrigatorios(req, res) {
+const sequelize = require('sequelize');
+const Lancamento = require('../../models/LctosModel');
+
+function CamposObrigatorios(id) {
 
     if (!req.body.nome) {
         throw new Error("campo 'nome' é obrigatório.");
@@ -24,16 +27,26 @@ function CamposObrigatorios(req, res) {
 
 }
 
-function totalEmLancamentos(req, res) {
+async function totalEmLancamentos(id) {
 
-    // Quando tiver tabela de lançamentos financeiros... Implementar esta função.
-    const { id } = req.params;
+    try {
 
-    // dsfdsfsdf
+        const soma = await Lancamento.findAll({
+            attributes: [
+                [sequelize.fn('sum', sequelize.col('valor')), 'valorTotal'],
+            ],
+            where: { categoria_id: id },
+        });
 
-    const valorTotal = 0.0; // retornar total(em R$) de lançamentos feitos para esta categaria ( id )
+        if (soma[0].dataValues.valorTotal === null)
+            return 0.0;
+        else
+            return soma[0].dataValues.valorTotal;
 
-    return valorTotal;
+    } catch {
+        return 0.0;
+    };
+
 }
 
 module.exports = { CamposObrigatorios, totalEmLancamentos };
