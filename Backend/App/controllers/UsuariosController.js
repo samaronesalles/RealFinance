@@ -34,7 +34,7 @@ module.exports = {
                 attributes: atributos_Usuarios,
             });
 
-            return res.json(novo_usuario);
+            return res.status(200).json(novo_usuario);
 
         } catch (error) {
             return res.status(400).json({ error: error.message });
@@ -51,7 +51,7 @@ module.exports = {
                 attributes: atributos_Usuarios,
             });
 
-            return res.json(usuarios);
+            return res.status(200).json(usuarios);
 
         } catch (error) {
             return res.status(400).json({ error: error.message });
@@ -82,7 +82,7 @@ module.exports = {
 
             // usuarioEncontrado['senha'] = pass;
 
-            return res.json(usuarioEncontrado);
+            return res.status(200).json(usuarioEncontrado);
 
         } catch (error) {
             return res.status(400).json({ error: error.message });
@@ -127,7 +127,7 @@ module.exports = {
                 attributes: atributos_Usuarios,
             });
 
-            return res.json(usuarioEncontrado);
+            return res.status(200).json(usuarioEncontrado);
 
         } catch (error) {
             return res.status(400).json({ error: error.message });
@@ -153,7 +153,7 @@ module.exports = {
                 }
             });
 
-            return res.json({});
+            return res.status(200).json({});
 
         } catch (error) {
             return res.status(400).json({ error: error.message });
@@ -191,7 +191,7 @@ module.exports = {
 
             if (pass === senha) {
                 req.session.user = usuarioEncontrado;
-                return res.json(usuarioEncontrado);
+                return res.status(200).json(usuarioEncontrado);
             }
             else
                 throw new Error("email ou senha informados estão incorretos, ou o usuário não existe.");
@@ -204,7 +204,7 @@ module.exports = {
     },
 
     async auth(req, res) {
-        return res.json(req.session.user);
+        return res.status(200).json(req.session.user);
     }
 
 };

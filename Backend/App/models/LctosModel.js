@@ -19,7 +19,7 @@ class Lancamento extends Model {
     static associate(models) {
         this.hasOne(models.LancamentoFixo);
         this.belongsTo(models.Usuario, { foreignKey: 'usuarios_id' });
-        this.belongsTo(models.Categoria, { foreignKey: 'categoria_id' });
+        this.belongsTo(models.Categoria, { foreignKey: 'categoria_id', as: 'categoria' });
     };
 
 }

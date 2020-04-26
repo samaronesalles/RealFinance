@@ -32,7 +32,7 @@ module.exports = {
             }
 
             // Criando categoria no banco de dados
-            const tipoConvertido = tipo;//Utils.RecDespToInt(req.body['tipo']);
+            const tipoConvertido = tipo;
             delete tipoConvertido['tipo'];
 
             req.body['receita_ou_despesa'] = tipoConvertido;
@@ -53,11 +53,10 @@ module.exports = {
 
             novaCategoria.dataValues['receita_ou_despesa_desc'] = Utils.IntToRecDesp(novaCategoria.dataValues['receita_ou_despesa']);
 
-            //delete novaCategoria.dataValues.receita_ou_despesa;
             delete novaCategoria.dataValues.createdAt;
             delete novaCategoria.dataValues.updatedAt;
 
-            return res.json(novaCategoria);
+            return res.status(200).json(novaCategoria);
 
         } catch (error) {
             return res.status(400).json({ error: error.message });
@@ -93,7 +92,6 @@ module.exports = {
                 categorias.map((item) => {
                     const i = item.dataValues["receita_ou_despesa"];
 
-                    //delete item.dataValues.receita_ou_despesa;
                     delete item.dataValues.createdAt;
                     delete item.dataValues.updatedAt;
 
@@ -108,7 +106,7 @@ module.exports = {
                 });
             }
 
-            return res.json(categorias);
+            return res.status(200).json(categorias);
 
         } catch (error) {
             return res.status(400).json({ error: error.message });
@@ -144,7 +142,6 @@ module.exports = {
             if (categoria) {
                 const i = categoria.dataValues["receita_ou_despesa"];
 
-                //delete categoria.dataValues.receita_ou_despesa;
                 delete categoria.dataValues.createdAt;
                 delete categoria.dataValues.updatedAt;
 
@@ -152,7 +149,7 @@ module.exports = {
                 categoria.dataValues["total_lancamentos"] = await CheckCat.totalEmLancamentos(id);
             }
 
-            return res.json(categoria);
+            return res.status(200).json(categoria);
 
         } catch (error) {
             return res.status(400).json({ error: error.message });
@@ -160,7 +157,7 @@ module.exports = {
     },
 
     async dadosCategoriaComLctos(req, res) {                                  // Testado: OK
-        console.log('chegou em "Controllers>CategoriasController.dadosCategoria"');
+        console.log('chegou em "Controllers>CategoriasController.dadosCategoriaComLctos"');
 
         try {
             auth.isLogged(req, res);
@@ -196,14 +193,13 @@ module.exports = {
             if (categoria) {
                 const i = categoria.dataValues["receita_ou_despesa"];
 
-                //delete categoria.dataValues.receita_ou_despesa;
                 delete categoria.dataValues.createdAt;
                 delete categoria.dataValues.updatedAt;
 
                 categoria.dataValues["receita_ou_despesa_desc"] = Utils.IntToRecDesp(i);
             }
 
-            return res.json(categoria);
+            return res.status(200).json(categoria);
 
         } catch (error) {
             return res.status(400).json({ error: error.message });
@@ -238,7 +234,7 @@ module.exports = {
                 }
             });
 
-            return res.json();
+            return res.status(200).json({});
 
         } catch (error) {
             return res.status(400).json({ error: error.message });
@@ -269,7 +265,7 @@ module.exports = {
                 tipo = Utils.RecDespToInt(tipo);
             }
 
-            const tipoConvertido = tipo; //Utils.RecDespToInt(req.body['tipo']);
+            const tipoConvertido = tipo;
             delete tipoConvertido['tipo'];
 
             req.body['receita_ou_despesa'] = tipoConvertido;
@@ -284,11 +280,10 @@ module.exports = {
 
             categoria.dataValues['receita_ou_despesa_desc'] = Utils.IntToRecDesp(categoria.dataValues['receita_ou_despesa']);
 
-            //delete categoria.dataValues.receita_ou_despesa;
             delete categoria.dataValues.createdAt;
             delete categoria.dataValues.updatedAt;
 
-            return res.json(categoria);
+            return res.status(200).json(categoria);
 
         } catch (error) {
             return res.status(400).json({ error: error.message });
@@ -309,7 +304,7 @@ module.exports = {
 
             const valor = await CheckCat.totalEmLancamentos(id);
 
-            return res.json(valor);
+            return res.status(200).json(valor);
 
         } catch (error) {
             return res.status(400).json({ error: error.message });
