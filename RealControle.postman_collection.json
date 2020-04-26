@@ -277,7 +277,7 @@
 					"response": []
 				},
 				{
-					"name": "Retorna todas com lançamentos",
+					"name": "Retorna categoria com lançamentos",
 					"request": {
 						"method": "GET",
 						"header": [],

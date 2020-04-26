@@ -82,7 +82,8 @@ module.exports = {
                         model: Lancamento,
                         attributes: [[sequelize.fn('sum', sequelize.col('valor')), 'Total_Lctos']]
                     }
-                ]
+                ],
+                group: [atributos_Contegorias],
             });
 
             if (categorias) {
@@ -94,6 +95,13 @@ module.exports = {
                     delete item.dataValues.updatedAt;
 
                     item.dataValues["receita_ou_despesa_desc"] = Utils.IntToRecDesp(i);
+
+                    let t_lcto = 0;
+                    if (item.Lancamentos.length > 0)
+                        t_lcto = item.Lancamentos[0].dataValues.Total_Lctos;
+
+                    delete item.dataValues.Lancamentos;
+                    item.dataValues["total_lancamentos"] = t_lcto;
                 });
             }
 
@@ -172,7 +180,10 @@ module.exports = {
                         attributes: atributos_lctos,
                     },
                 ],
-
+                order: [
+                    [Lancamento, 'data_vencimento', 'desc']
+                ],
+                group: [atributos_Contegorias],
             });
 
             if (!categoria) {

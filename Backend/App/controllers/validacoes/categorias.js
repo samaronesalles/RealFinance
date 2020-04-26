@@ -1,7 +1,7 @@
 const sequelize = require('sequelize');
 const Lancamento = require('../../models/LctosModel');
 
-function CamposObrigatorios(id) {
+function CamposObrigatorios(req, res) {
 
     if (!req.body.nome) {
         throw new Error("campo 'nome' é obrigatório.");
