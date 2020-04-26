@@ -72,6 +72,9 @@ module.exports = {
             auth.isLogged(req, res);
 
             let categorias = await Categoria.findAll({
+                where: {
+                    usuario_id: req.session.user.id
+                },
                 atributes: atributos_Contegorias,
                 include: [
                     {
