@@ -398,6 +398,37 @@
 						}
 					},
 					"response": []
+				},
+				{
+					"name": "Retornar todas",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n\t\"categoria_id\" : 9,\r\n\t\"vencimento_de\" : \"01/05/2020\",\r\n\t\"vencimento_ate\" : \"15/05/2020\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:3000/api/lancamentos",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"lancamentos"
+							]
+						}
+					},
+					"response": []
 				}
 			],
 			"protocolProfileBehavior": {}

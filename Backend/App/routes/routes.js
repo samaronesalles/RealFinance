@@ -27,5 +27,6 @@ routes.get('/catsTotLcto/:id', CatController.TotalLancadoCategoria);            
 
 // Lançamentos
 routes.post('/novoLcto', lctoController.novoLancamento);                                       // Testado: OK
+routes.get('/lancamentos', lctoController.lancamentosFinanceiros);                             // Testado: OK
 
 module.exports = routes;
