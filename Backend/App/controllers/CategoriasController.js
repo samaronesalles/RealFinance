@@ -15,8 +15,6 @@ module.exports = {
         console.log('chegou em "Controllers>CategoriasController.novaCategoria"');
 
         try {
-            auth.isLogged(req, res);
-
             let { nome, tipo } = req.body;
 
             CheckCat.CamposObrigatorios(req, res);
@@ -68,8 +66,6 @@ module.exports = {
         console.log('chegou em "Controllers>CategoriasController.listaCategorias"');
 
         try {
-            auth.isLogged(req, res);
-
             let categorias = await Categoria.findAll({
                 where: {
                     usuario_id: req.session.user.id
@@ -85,7 +81,7 @@ module.exports = {
                         attributes: [[sequelize.fn('sum', sequelize.col('valor')), 'Total_Lctos']]
                     }
                 ],
-                group: [atributos_Contegorias],
+                group: atributos_Contegorias,
             });
 
             if (categorias) {
@@ -117,8 +113,6 @@ module.exports = {
         console.log('chegou em "Controllers>CategoriasController.dadosCategoria"');
 
         try {
-            auth.isLogged(req, res);
-
             const { id } = req.params;
 
             if (!id) {
@@ -160,8 +154,6 @@ module.exports = {
         console.log('chegou em "Controllers>CategoriasController.dadosCategoriaComLctos"');
 
         try {
-            auth.isLogged(req, res);
-
             const { id } = req.params;
 
             if (!id) {
@@ -210,8 +202,6 @@ module.exports = {
         console.log('chegou em "Controllers>CategoriasController.deleteCategoria"');
 
         try {
-            auth.isLogged(req, res);
-
             const { id } = req.params;
 
             if (!id) {
@@ -245,7 +235,6 @@ module.exports = {
         console.log('chegou em "Controllers>CategoriasController.atualizarCategoria"');
 
         try {
-            auth.isLogged(req, res);
             const { id } = req.params;
 
             if (!id) {
@@ -294,8 +283,6 @@ module.exports = {
         console.log('chegou em "Controllers>CategoriasController.TotalLancadoCategoria"');
 
         try {
-            auth.isLogged(req, res);
-
             const { id } = req.params;
 
             if (!id) {

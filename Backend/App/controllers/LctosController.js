@@ -14,8 +14,6 @@ module.exports = {
         console.log('chegou em "Controllers>LctosController.novoLancamento"');
 
         try {
-            auth.isLogged(req, res);
-
             const { lancamento_fixo, data_vencimento, data_pagamento } = req.body;
 
             CheckLancamento.CamposObrigatorios(req, res);
@@ -49,8 +47,6 @@ module.exports = {
         console.log('chegou em "Controllers>LctosController.novoLancamento"');
 
         try {
-            auth.isLogged(req, res);
-
             const { categoria_id, vencimento_de, vencimento_ate } = req.body;
 
             // Montando filtro...
