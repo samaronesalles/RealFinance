@@ -50,12 +50,12 @@ export class CategoryFormComponent implements OnInit {
     this.submitted = true;
     if (this.form.valid) {
 
-      let msgSucess = 'Curso criado com sucesso'
+      let msgSucess = 'Categoria criada com sucesso'
       let msgError = 'Erro ao cadastrar nova categoria, favor realizar novamente!'
       
       if(this.form.value.id){
         msgSucess='Sua categoria foi alterada com sucesso!'
-        msgError=' Erro ao atualizar curso, tente novamente.';
+        msgError=' Erro ao atualizar categoria, tente novamente.';
       }
       
          this.service.save(this.form.value).then( 

@@ -27,4 +27,9 @@ export class LoginService {
       return response.data;
   }
 
+  async isLogged() {
+    const response = await API.get('/auth');
+    return response.data;
+  }
+
 }
