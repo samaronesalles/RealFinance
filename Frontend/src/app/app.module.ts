@@ -1,5 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
+import { CurrencyMaskModule } from "ng2-currency-mask";
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -15,6 +16,9 @@ import { CategoriesComponent } from './categories/categories.component';
 import { CategoryComponent } from './categories/category/category.component';
 import { CategoryFormComponent } from './categories/category-form/category-form.component';
 import { ModalComponent } from './shared/modal/modal.component';
+import { EntriesComponent } from './entries/entries.component';
+import { ExpenseFormComponent } from './entries/expense-form/expense-form.component';
+import { RevenueFormComponent } from './entries/revenue-form/revenue-form.component';
 
 
 
@@ -29,15 +33,18 @@ import { ModalComponent } from './shared/modal/modal.component';
     CategoriesComponent,
     CategoryComponent,
     CategoryFormComponent,
-    ModalComponent
+    ModalComponent,
+    EntriesComponent,
+    ExpenseFormComponent,
+    RevenueFormComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     HttpModule,
     ReactiveFormsModule,
-    FormsModule
-
+    FormsModule,
+    CurrencyMaskModule,
   ],
   providers: [LoginService],
   bootstrap: [AppComponent]
