@@ -1,0 +1,68 @@
+<section class="teste">
+    <div class="container">
+        <div class="container-form">
+            <form #form="ngForm" novalidate>
+                <div class="titulo-page">
+                    <h3>Lançamento de Despesa</h3>
+                    <hr>
+                </div>
+                <div class="form-group">
+                    <div class="col-md-6 mb-3">
+                        <label for="descricao">Descrição</label>
+                        <input id="descricao" type="text" name="descricao" maxlength="100" required ngModel
+                            class="form-control" />
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-md-3 mb-3">
+                        <label for="valor">Valor</label>
+                        <input currencyMask [options]="{ prefix: 'R$ ', thousands: '.', decimal: ',' }" id="valor"
+                            type="text" name="valor" required ngModel class="form-control" />
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-md-3 mb-3">
+                        <label for="categoria_id">Categoria</label>
+                        <br>
+                        <select name="categoria_id" required ngModel class="form-control">
+                            <option *ngFor="let item of expenseCategories" [value]="item.id">
+                                {{item.nome}}
+                            </option>
+                        </select>
+                    </div>
+                    <div *ngIf="expenseCategories.length == 0" class="msg-erro">
+                        É necessário ter pelo menos 1 categoria cadastrada!
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-md-3 mb-3">
+                        <label for="datarec">Data de vencimento</label>
+                        <input id="datarec" type="date" name="data_vencimento" required ngModel class="form-control" />
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-md-6 mb-3">
+                        <label for="fixo">Ja foi pago? &nbsp;</label>
+                        <input id="fixo" type="checkbox" name="ja_pago" ngModel />
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-md-6 mb-3">
+                        <label for="fixo">Lançamento fixo? &nbsp;</label>
+                        <input id="fixo" type="checkbox" name="lancamento_fixo" ngModel />
+                        <div *ngIf="form.value.lancamento_fixo">Ao marcar essa opção o lançamento será recorrente todos os meses
+                        </div>
+                    </div>
+                </div>
+                <div class="msg-erro">
+                    {{errorMessage}}
+                </div>
+                <div class="col-md-4 mb-3 div-actions">
+                    <button type="submit" [disabled]="!form.valid" class="btn btn-success btn-actions"
+                        (click)="createEntry(form.value)">Salvar</button>
+                    <button type="button" [routerLink]="['/nova_pagina']" class="btn btn-outline-dark">Cancelar</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</section>
