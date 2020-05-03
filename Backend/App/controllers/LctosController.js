@@ -73,7 +73,7 @@ module.exports = {
             // Pesquisando lançamentos...
             const lancamentos = await Lancamento.findAll({
                 where: condicaoWhere,
-                attributes: ['id', ['data_vencimento', 'vencimento'], 'descricao', 'ja_pago'],
+                attributes: ['id', ['data_vencimento', 'vencimento'], 'descricao', 'valor', 'ja_pago'],
                 include: [
                     {
                         model: Categoria, as: 'categoria',
@@ -104,7 +104,7 @@ module.exports = {
                     {
                         model: Lancamento,
                         where: condicaoWhere,
-                        attributes: ['id', ['data_vencimento', 'vencimento'], 'descricao', 'ja_pago'],
+                        attributes: ['id', ['data_vencimento', 'vencimento'], 'descricao', 'valor', 'ja_pago'],
                         include: [
                             {
                                 model: Categoria, as: 'categoria',
