@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { LoggedService } from './logged/logged.service';
 import { Router } from '@angular/router';
+import { LoginService } from './login.service';
 
 @Component({
   selector: 'app-root',
@@ -9,7 +9,7 @@ import { Router } from '@angular/router';
 })
 export class AppComponent implements OnInit {
 
-  constructor(private loggedService: LoggedService, private router: Router) { }
+  constructor(private loggedService: LoginService, private router: Router) { }
 
   userLogged: string = undefined;
 
