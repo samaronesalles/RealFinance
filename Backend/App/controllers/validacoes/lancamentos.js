@@ -24,7 +24,7 @@ function novaPosicao_OrderVencimento_Desc(lctos, novaData) {
 
     for (var i = lctos.length - 1; i >= 0; i--) {
 
-        const dataItem = moment(lctos[i].dataValues["vencimento"]);
+        const dataItem = moment(lctos[i].vencimento);
 
         if (dataItem >= novaData)
             return i;

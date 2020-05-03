@@ -49,6 +49,8 @@ module.exports = {
         try {
             const { categoria_id, vencimento_de, vencimento_ate } = req.body;
 
+            let resultado = [];
+
             // Montando filtro...
             let condicaoWhere = {
                 usuarios_id: req.session.user.id,
@@ -87,6 +89,9 @@ module.exports = {
                 lancamentos.map((item) => {
                     const i = item.categoria.dataValues["receita_ou_despesa"];
                     item.categoria.dataValues["receita_ou_despesa_desc"] = Utils.IntToRecDesp(i);
+
+                    let itemTemp = Object.assign({}, item.dataValues);
+                    resultado.push(itemTemp);
                 });
             }
 
@@ -120,18 +125,17 @@ module.exports = {
                     while (inicio <= fim) {
                         dataDoItem = moment(moment(dataDoItem).set('month', moment(inicio).month())).format("YYYY-MM-DD");
 
-                        const pos = lancamentos.findIndex((atual) => ((atual.dataValues.id === item.Lancamento.dataValues.id) && (atual.dataValues.vencimento === dataDoItem)));
+                        const pos = resultado.findIndex((atual) => ((atual.id === item.Lancamento.dataValues.id) && (atual.vencimento === dataDoItem)));
 
                         if (pos < 0) {
-                            //                            let itemTemp = Object.assign({}, item.Lancamento);
-                            let itemTemp = item.Lancamento;
-                            itemTemp.dataValues.vencimento = dataDoItem;
+                            let itemTemp = Object.assign({}, item.Lancamento.dataValues);
+                            itemTemp.vencimento = dataDoItem;
 
-                            const novaPosicao = UtilsLancamento.novaPosicao_OrderVencimento_Desc(lancamentos, moment(dataDoItem));
+                            const novaPosicao = UtilsLancamento.novaPosicao_OrderVencimento_Desc(resultado, moment(dataDoItem));
 
                             if (novaPosicao >= 0) {
-                                itemTemp.dataValues["id"] = -1;
-                                lancamentos.splice(novaPosicao, 0, itemTemp);
+                                itemTemp.id = -1;
+                                resultado.splice(novaPosicao, 0, itemTemp);
                             }
 
                         }
@@ -143,7 +147,7 @@ module.exports = {
                 });
             }
 
-            return res.status(200).json(lancamentos);
+            return res.status(200).json(resultado);
 
         } catch (error) {
             return res.status(400).json({ error: error.message });
