@@ -19,11 +19,11 @@ module.exports = {
             UtilsLancamento.CamposObrigatorios(req, res);
 
             req.body['usuarios_id'] = req.session.user.id;
-            req.body['data_vencimento'] = Utils.ddmmaaa_aaaammdd(req.body['data_vencimento']);
+            req.body['data_vencimento'] = moment(req.body['data_vencimento'], 'DD/MM/YYYY').format("YYYY-MM-DD");
 
             if ((data_pagamento) && (data_pagamento.length == 10)) {
                 req.body['ja_pago'] = true;
-                req.body['data_pagamento'] = Utils.ddmmaaa_aaaammdd(req.body['data_pagamento']);
+                req.body['data_pagamento'] = moment(req.body['data_pagamento'], 'DD/MM/YYYY').format("YYYY-MM-DD");
             } else {
                 req.body['ja_pago'] = false;
                 delete req.body['data_pagamento'];
