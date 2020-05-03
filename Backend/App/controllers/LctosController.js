@@ -89,6 +89,7 @@ module.exports = {
                 lancamentos.map((item) => {
                     const i = item.categoria.dataValues["receita_ou_despesa"];
                     item.categoria.dataValues["receita_ou_despesa_desc"] = Utils.IntToRecDesp(i);
+                    item.dataValues["lancamento_origem"] = -1;
 
                     let itemTemp = Object.assign({}, item.dataValues);
                     resultado.push(itemTemp);
@@ -117,6 +118,7 @@ module.exports = {
                 lancamentosFixos.map((item) => {
                     const i = item.Lancamento.categoria.dataValues["receita_ou_despesa"];
                     item.Lancamento.categoria.dataValues["receita_ou_despesa_desc"] = Utils.IntToRecDesp(i);
+                    item.Lancamento.dataValues["lancamento_origem"] = item.dataValues.Lancamento.id;
 
                     let dataDoItem = moment(item.Lancamento.dataValues["vencimento"]).format("YYYY-MM-DD");
                     let inicio = moment(dataDoItem);

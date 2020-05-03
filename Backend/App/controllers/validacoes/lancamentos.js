@@ -30,7 +30,7 @@ function novaPosicao_OrderVencimento_Desc(lctos, novaData) {
             return i;
     }
 
-    return -1;
+    return 0;  // Significa que a "novaData" é maior que todas, então adiciona no topo da lista.
 }
 
 module.exports = { CamposObrigatorios, novaPosicao_OrderVencimento_Desc };
