@@ -1,3 +1,5 @@
+const moment = require('moment');
+
 function CamposObrigatorios(req, res) {
 
     if (!req.body.categoria_id) {
@@ -18,4 +20,17 @@ function CamposObrigatorios(req, res) {
 
 }
 
-module.exports = { CamposObrigatorios };
+function novaPosicao_OrderVencimento_Desc(lctos, novaData) {
+
+    for (var i = lctos.length - 1; i >= 0; i--) {
+
+        const dataItem = moment(lctos[i].dataValues["vencimento"]);
+
+        if (dataItem >= novaData)
+            return i;
+    }
+
+    return -1;
+}
+
+module.exports = { CamposObrigatorios, novaPosicao_OrderVencimento_Desc };

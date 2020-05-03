@@ -6,7 +6,7 @@ const LancamentoFixo = require('../models/LctosFixosModel');
 const Categoria = require('../models/CategoriasModel');
 const Utils = require('../Utils/functions');
 const auth = require('../routes/middleware/auth');
-const CheckLancamento = require('../controllers/validacoes/lancamentos');
+const UtilsLancamento = require('../controllers/validacoes/lancamentos');
 
 module.exports = {
 
@@ -14,9 +14,9 @@ module.exports = {
         console.log('chegou em "Controllers>LctosController.novoLancamento"');
 
         try {
-            const { lancamento_fixo, data_vencimento, data_pagamento } = req.body;
+            const { lancamento_fixo, data_pagamento } = req.body;
 
-            CheckLancamento.CamposObrigatorios(req, res);
+            UtilsLancamento.CamposObrigatorios(req, res);
 
             req.body['usuarios_id'] = req.session.user.id;
             req.body['data_vencimento'] = Utils.ddmmaaa_aaaammdd(req.body['data_vencimento']);
@@ -61,14 +61,14 @@ module.exports = {
             let ultimoDia = moment().endOf('month').format("YYYY-MM-DD");
 
             if (((vencimento_de) && (vencimento_ate)) && ((vencimento_de.length == 10) && (vencimento_ate.length == 10))) {
-                primeiroDia = Utils.ddmmaaa_aaaammdd(vencimento_de);
-                ultimoDia = Utils.ddmmaaa_aaaammdd(vencimento_ate);
+                primeiroDia = moment(vencimento_de, 'DD/MM/YYYY').format("YYYY-MM-DD");
+                ultimoDia = moment(vencimento_ate, 'DD/MM/YYYY').format("YYYY-MM-DD");
             };
 
             const data_vencimento = { [Op.between]: [primeiroDia, ultimoDia] };
             condicaoWhere["data_vencimento"] = data_vencimento;
 
-            // Pesquisando...
+            // Pesquisando lançamentos...
             const lancamentos = await Lancamento.findAll({
                 where: condicaoWhere,
                 attributes: ['id', ['data_vencimento', 'vencimento'], 'descricao', 'ja_pago'],
@@ -91,6 +91,57 @@ module.exports = {
             }
 
 
+            // Exibindo fixos
+            const lancamentosFixos = await LancamentoFixo.findAll({
+                attributes: ['id'],
+                include: [
+                    {
+                        model: Lancamento,
+                        attributes: ['id', ['data_vencimento', 'vencimento'], 'descricao', 'ja_pago'],
+                        include: [
+                            {
+                                model: Categoria, as: 'categoria',
+                                attributes: [['id', 'categoria_id'], ['nome', 'categoria_desc'], 'cor', 'receita_ou_despesa'],
+                            },
+                        ],
+                    }
+                ],
+            });
+
+            if (lancamentosFixos) {
+                lancamentosFixos.map((item) => {
+                    const i = item.Lancamento.categoria.dataValues["receita_ou_despesa"];
+                    item.Lancamento.categoria.dataValues["receita_ou_despesa_desc"] = Utils.IntToRecDesp(i);
+
+                    let dataDoItem = moment(item.Lancamento.dataValues["vencimento"]).format("YYYY-MM-DD");
+                    let inicio = moment(dataDoItem);
+                    let fim = moment(ultimoDia);
+
+                    while (inicio <= fim) {
+                        dataDoItem = moment(moment(dataDoItem).set('month', moment(inicio).month())).format("YYYY-MM-DD");
+
+                        const pos = lancamentos.findIndex((atual) => ((atual.dataValues.id === item.Lancamento.dataValues.id) && (atual.dataValues.vencimento === dataDoItem)));
+
+                        if (pos < 0) {
+                            //                            let itemTemp = Object.assign({}, item.Lancamento);
+                            let itemTemp = item.Lancamento;
+                            itemTemp.dataValues.vencimento = dataDoItem;
+
+                            const novaPosicao = UtilsLancamento.novaPosicao_OrderVencimento_Desc(lancamentos, moment(dataDoItem));
+
+                            if (novaPosicao >= 0) {
+                                itemTemp.dataValues["id"] = -1;
+                                lancamentos.splice(novaPosicao, 0, itemTemp);
+                            }
+
+                        }
+
+                        inicio = moment(inicio).add(1, 'months').calendar();
+                        inicio = moment(moment(inicio).format('YYYY-MM-DD'));
+                    }
+
+                });
+            }
 
             return res.status(200).json(lancamentos);
 
