@@ -38,7 +38,7 @@
                 <div class="form-group">
                     <div class="col-md-3 mb-3">
                         <label for="datarec">Data de recebimento</label>
-                        <input id="datarec" type="date" name="data_pagamento" required ngModel class="form-control" />
+                        <input id="datarec" type="date" name="data_vencimento" required ngModel class="form-control" />
                     </div>
                 </div>
                 <div class="form-group">
@@ -55,7 +55,7 @@
                 <div class="col-md-4 mb-3 div-actions">
                     <button type="submit" [disabled]="!form.valid" class="btn btn-success btn-actions"
                         (click)="createEntry(form.value)">Salvar</button>
-                    <button type="button" [routerLink]="['/']" class="btn btn-outline-dark">Cancelar</button>
+                    <button type="button" [routerLink]="['/nova_pagina']" class="btn btn-outline-dark">Cancelar</button>
                 </div>
             </form>
         </div>
