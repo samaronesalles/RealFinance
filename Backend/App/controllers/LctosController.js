@@ -131,12 +131,14 @@ module.exports = {
 
                         if (pos < 0) {
                             let itemTemp = Object.assign({}, item.Lancamento.dataValues);
+
+                            itemTemp.id = -1;
                             itemTemp.vencimento = dataDoItem;
+                            itemTemp.ja_pago = false;
 
                             const novaPosicao = UtilsLancamento.novaPosicao_OrderVencimento_Desc(resultado, moment(dataDoItem));
 
                             if (novaPosicao >= 0) {
-                                itemTemp.id = -1;
                                 resultado.splice(novaPosicao, 0, itemTemp);
                             }
 
