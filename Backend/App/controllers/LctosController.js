@@ -103,6 +103,7 @@ module.exports = {
                 include: [
                     {
                         model: Lancamento,
+                        where: condicaoWhere,
                         attributes: ['id', ['data_vencimento', 'vencimento'], 'descricao', 'ja_pago'],
                         include: [
                             {
