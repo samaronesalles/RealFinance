@@ -22,14 +22,12 @@ export class CategoryComponent implements OnInit {
     try{
       const response = this.service.deteleCategory(id).then(sucess => {"Categoria apagada com sucesso!"},error =>{
         console.log(response)
-      }
-      );
+      });
      // this.messageReturn="Categoria apagada com sucesso!"
        this.load();
     }catch(err){
       this.messageReturn = err.response.data.error;
     }
-      
   }
 
   load() {

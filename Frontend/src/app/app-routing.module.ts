@@ -9,7 +9,7 @@ import { CategoryFormComponent } from './categories/category-form/category-form.
 import { CategoryResolverGuard } from './categories/guards/category-resolver.guard';
 import { ExpenseFormComponent } from './entries/expense-form/expense-form.component';
 import { RevenueFormComponent } from './entries/revenue-form/revenue-form.component';
-
+import {ExtractsComponent} from './extracts/extracts.component'
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
@@ -21,7 +21,7 @@ const routes: Routes = [
   { path: 'editar/:id', component: CategoryFormComponent, resolve: { category: CategoryResolverGuard } },
   { path: 'entry-expense', component: ExpenseFormComponent },
   { path: 'entry-revenue', component: RevenueFormComponent },
-  
+  { path: 'extracts', component: ExtractsComponent}
 ];
 
 @NgModule({

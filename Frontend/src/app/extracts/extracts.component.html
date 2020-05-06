@@ -1,0 +1,79 @@
+<head>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+</head>
+<body>
+    <div class="head-page"></div>
+
+    <div class="corpo_page">
+        <div class="title-page centerr">
+            <h4>Lançamentos</h4>
+        </div> 
+        <div class="releases-page">
+            <!-- <div class="style-filter ">
+                <form #form="ngForm" novalidate> 
+                        <div class="col-m2" >
+                            <label  for="dataInicio">Data Inicio</label>
+                            <input name="dataInicio" type="date">
+                        </div>
+                
+                        <div class="col-m2">
+                            <label   for="dataFim">Data Fim</label>
+                            <input name="dataFim" type="date">
+                        </div>
+
+                        <div class="col-m2">
+                            <label for="idCategoria">Categoria</label>
+                            <input name="idCategoria" required type="text">
+                        </div>
+                        <div class="col-m2 centerr">
+                            <button  (click)="onFilter(form.value)" type="submit"  class="btn-filter">Filtrar</button>
+                        </div>
+                    </form>
+            </div> -->
+            <div class="actions">   
+                <button class="cad-recipe centerc" [routerLink]="['/entry-revenue']" ><i class="material-icons cl-white"> add</i>Receita</button> 
+                <button class="cad-expense centerc" [routerLink]="['/entry-expense']" ><i class="material-icons cl-white"> add</i>Despesa</button>
+            </div> 
+            <div class="centerr">
+                <table widht="4000px">
+                    <thead> 
+                        <tr>
+                            <th colspan="3">Category</th>
+                            <th>Description Lançamento</th>
+                            <th>Data</th>
+                            <th>Valor</th>
+                            <th>Status</th>
+                            <th>Açoes</th>
+                        </tr>
+                    </thead>
+                    <tbody> 
+                        <tr *ngFor="let extract of extracts">
+                            <td><i class="material-icons" [style.color]="extract.categoria.cor"> bookmark</i></td>
+                            <td  class="centerc">
+                                <div [ngClass]="{'style-expense': extract.categoria.receita_ou_despesa_desc =='Despesa','style-recipe':  extract.categoria.receita_ou_despesa_desc == 'Receita'}">{{extract.categoria.receita_ou_despesa_desc}}</div>
+                            </td>
+                            <td>{{extract.categoria.categoria_desc}}</td>
+                            <td>{{extract.descricao}}</td>
+                            <td>{{extract.vencimento}}</td>
+                            <td><div  class="centerc"><i class="material-icons color md-18">monetization_on</i>{{extract.valor}}</div></td>
+                            <td class="tr-status centerc"> 
+                                <div *ngIf="extract.ja_pago" class="lbl-status status-paid-out centerc">PAGO</div>
+                                <div *ngIf="!extract.ja_pago" class="lbl-status centerc status-pending">PENDENTE</div>
+                            </td>
+                            <td>    
+                                <div class="action">   
+                                    <a href="./"></a> 
+                                    <img src="assets/img/menus.jpg"  width="10" >
+                                    <div class="submenu">
+                                        <a href="./"> <div class="submenuitem"><i class="material-icons md-18">create</i>Editar</div></a>
+                                        <a href="./"> <div class="submenuitem"><i class="material-icons md-18">delete</i>Excluir</div> </a>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</body>

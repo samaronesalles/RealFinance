@@ -1,15 +1,18 @@
-
+.header{
+    width: 100%;
+    height: 80px;
+}
 .page-categories{
     width: 100%;
-    height: 2000px;
+    height: 900px;
    background-color: whitesmoke;
     
 }
 
 .page{
     width: 90%;
-    margin-top: 70px;
-    margin-left: 60px;
+    padding-top: 70px ;
+    margin:auto;
     height: 900px;
     padding-top: 12px;
     padding-left: 12px;
@@ -18,15 +21,14 @@
 .tp{
     width: 100%;
     height: 50px;
-    color:#228b22;
+    color:grey;
     font-family: 'Quicksand', sans-serif;
-    
 }
 
 .panel{
     background-color: white;
     width: 240px;
-    height: 100px;
+    height: 90px;
     margin:10px;
     border-radius: 22px;
     color: grey;
@@ -41,7 +43,7 @@
     width:60%;
     float: left;
     height:97px;
-    font-size: 20px;
+    font-size: 16px;
     text-align: center;
     padding-top: 12px;  
 }
@@ -60,23 +62,27 @@
     align-items: center;
 }
 
-.container {
+.container-page {
 	display: flex;
 	flex-flow: row wrap;
 	justify-content:start space-around; 
     align-items: baseline;
+    
 }
 
 .action{
+    margin-top: 12px;
     width: 100%;
     margin:auto;
-    height: 50px;
+    height: 80px;
+  
 }
 
 .dv1{
     float: left;
     width: 50%;
     height: 40px;
+    background-color: blue;
 
 }
 
@@ -91,4 +97,50 @@
 .dv2 button{
     float: right;
 }
+
+
+.center {
+    display: flex;
+    justify-content: center;
+    align-items: center
+}
+
+
+.classBtnAdd {
+    width: 150px;
+    height: 100px;
+    background-color: white;
+    border-radius: 12px;
+    box-shadow: 2px 2px  #c0c0c0;	
+}
+
+
+.material-icons.color { color: grey; }
+
+.material-icons.md-48 { font-size: 50px; }
+
+.md-45{
+    font-size: 50px; 
+}
+
+.style-expense{
+    color:teal;
+}
+
+.style-recipe{
+    color: rebeccapurple;
+}
+
+.actions{
+    width: 100%;
+    height: 120px;
+}
+
+.actions a{
+    list-style: none;
+    text-decoration: none;
+}
+
+
+
 

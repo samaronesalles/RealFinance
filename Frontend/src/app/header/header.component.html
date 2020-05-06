@@ -1,29 +1,33 @@
 <section class="header">
   <div class="opcoes-header">
     <div class="logo-header">
-      <a href="#">
-        <img src="assets/img/iconeRealControle.png" width="30" height="30" alt="">
+      <a  *ngIf="!user" href="#">
+        <img   src="assets/img/iconefinanceiro.png" width="40" height="40" alt="">
+        <span><b>REAL</b>CONTROLE</span>
+      </a>
+      <a *ngIf="user"   [routerLink]="['/categories']">
+        <img src="assets/img/iconefinanceiro.png" width="40" height="40" alt="">
         <span><b>REAL</b>CONTROLE</span>
       </a>
     </div>
 
     <div class="menu-header">
       <ul class="nav justify-content-end">
-        <li class="nav-item">
+        <!-- <li class="nav-item">
           <a class="nav-link" href="#">Home</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" [routerLink]="['/categories']">Sobre</a>
-        </li>
+        </li> -->
         <li *ngIf="!user" class="nav-item" class="btn-entrar">
-          <button class="btnEntrar" [routerLink]="['/sign-in']">Entrar</button>
+          <button class="btnLogin" [routerLink]="['/sign-in']">Login</button>
         </li>
-        <li *ngIf="user" class="nav-item">
-          <a class="nav-link" href="#">Log Out</a>
+        <li *ngIf="user" class="nav-item dropdown"> 
+          <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
+            <i class="material-icons md-18  color">account_circle</i>{{user.nome}}
+          </a>
+          <div class="dropdown-menu">
+            <a class="dropdown-item" href="#">Sair</a>
+          </div>
         </li>
       </ul>
-
     </div>
   </div>
-
 </section>

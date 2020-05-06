@@ -19,6 +19,7 @@ import { ModalComponent } from './shared/modal/modal.component';
 import { EntriesComponent } from './entries/entries.component';
 import { ExpenseFormComponent } from './entries/expense-form/expense-form.component';
 import { RevenueFormComponent } from './entries/revenue-form/revenue-form.component';
+import { ExtractsComponent } from './extracts/extracts.component';
 
 
 
@@ -36,7 +37,8 @@ import { RevenueFormComponent } from './entries/revenue-form/revenue-form.compon
     ModalComponent,
     EntriesComponent,
     ExpenseFormComponent,
-    RevenueFormComponent
+    RevenueFormComponent,
+    ExtractsComponent
   ],
   imports: [
     BrowserModule,

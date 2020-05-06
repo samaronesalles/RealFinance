@@ -1,21 +1,20 @@
 <div class="item-category pdd-lg item">
     <div class="card-header">
       <div class="card-title f-title row">
-        <div class="icon-color-card" [style.background-color]="category.cor"></div>
+        <div class="style-icon-category"> <i class="material-icons" [style.color]="category.cor"> bookmark</i></div>
         <div>{{category.nome}}</div>
         </div>
       <div class="card-actions">
            <a class="icons item"><img src="assets/img/icon-delete.png" (click)="delete(category.id)"  title="Delete" width="10px"  height="10px"></a>
            <a class="icons item"><img src="assets/img/icon-edit2.png"  title="Edit"   width="20px" height="20px" (click) ="onEdit(category.id)">
            </a> 
-           <a  class="f-desc"  [ngClass]="{'lbl-despesa': category.receita_ou_despesa_desc =='Despesa','lbl-receita': category.receita_ou_despesa_desc == 'Receita'}"  name="receita_ou_despesa_desc">{{category.receita_ou_despesa_desc}}</a>  
+           <a  class="f-desc"  [ngClass]="{'style-expense': category.receita_ou_despesa_desc =='Despesa','style-recipe': category.receita_ou_despesa_desc == 'Receita'}"  name="receita_ou_despesa_desc">{{category.receita_ou_despesa_desc}}</a>  
       </div>
    </div>
    <div class="card-info border-top">
     <div class="col-desc f-desc fcl">{{category.descricao}}</div>
      <div class="col-val f-title fc fg">R$ 15,00</div>
    </div>
- 
 </div>
 
 
