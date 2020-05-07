@@ -9,7 +9,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 })
 export class CategoryComponent implements OnInit {
 
-  @Input() category: Category
+  @Input() categories: Category[]
   messageReturn = undefined;
 
   constructor(private service: CategoryService, private router:Router, private route:ActivatedRoute) { }
@@ -20,15 +20,12 @@ export class CategoryComponent implements OnInit {
 
   async delete(id: number){
     try{
-      const response = this.service.deteleCategory(id).then(sucess => {"Categoria apagada com sucesso!"},error =>{
-        console.log(response)
-      });
-     // this.messageReturn="Categoria apagada com sucesso!"
-       this.load();
+      const response = await this.service.deteleCategory(id);
     }catch(err){
       this.messageReturn = err.response.data.error;
     }
   }
+
 
   load() {
     location.reload()

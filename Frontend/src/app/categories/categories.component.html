@@ -33,20 +33,12 @@
                     <i class="material-icons  color">bookmarks</i> Categories </a>
                     <div class="dropdown-menu">
                       <a class="dropdown-item" [routerLink]="['/extracts']">Extratos</a> 
+                      <a class="dropdown-item" [routerLink]="['/novo']"> Nova Categoria</a> 
                     </div>
             </div>
         </div>
-        <div class="actions">
-            <a  [routerLink]="['/novo']">
-                <div class="classBtnAdd center">
-                 <i class="material-icons md-45  color">add</i>
-                </div>
-            </a>
-       </div> 
-        <div class="container-page">
-            <div *ngFor="let category of categories">
-                <app-category [category]="category"></app-category>
-            </div>
+        <div class="list-categories">
+            <app-category [categories]="categories"></app-category>
         </div>
     </div>
 </body>

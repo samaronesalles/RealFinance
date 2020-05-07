@@ -39,9 +39,9 @@
                 <table id="table-extracts" class="display nowrap">
                     <thead> 
                         <tr>
-                            <th colspan="2">Category</th>
+                            <th colspan="2">Categoria</th>
                             <th>Data</th>
-                            <th>Description Lançamento</th>
+                            <th>Descrição</th>
                             <th>Valor</th>
                             <th>Status</th>
                             <th>Açoes</th>
@@ -54,7 +54,7 @@
                                 <div [ngClass]="{'style-expense': extract.categoria.receita_ou_despesa_desc =='Despesa','style-recipe': extract.categoria.receita_ou_despesa_desc == 'Receita'}">{{extract.categoria.receita_ou_despesa_desc}}</div>
                             </td>
                             <td>{{extract.vencimento | date: 'dd/MM/yyyy'}}</td>
-                            <td>{{extract.descricao}}</td>
+                            <td class="centerr">{{extract.descricao}}</td>
                             <td><div  class="centerc color">{{extract.valor| currency: 'BRL': true}}</div></td>
                             <td class="tr-status centerc"> 
                                 <div *ngIf="extract.ja_pago" class="lbl-status status-paid-out centerc">PAGO</div>
@@ -76,12 +76,4 @@
             </div>
         </div>
     </div>
-    <script>
-    $(document).ready(function() {
-        $('#table-extracts').DataTable( {
-            "scrollY": 200,
-            "scrollX": true
-        } );
-    } );
-    </script>
 </body>
