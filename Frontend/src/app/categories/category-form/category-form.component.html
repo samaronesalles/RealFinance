@@ -21,7 +21,8 @@
                     <div class="col-md-6 mb-3">
                         <label for="description">Descrição</label>
                         <input id="description" name="descricao" type="text" class="form-control lg" required
-                            minlength="5" autocomplete="off" formControlName="descricao">
+                            minlength="5" autocomplete="off" formControlName="descricao" [ngClass]="{'is-invalid': submitted && hasError('descricao')}" />
+                            <div class="invalid-feedback">Campo Obrigatório. Com quantidade mínima de caracteres: 5.</div>
                     </div>
                 </div>
                 <div class="col-md-4 mb-3">
@@ -29,20 +30,22 @@
                     <div id="radio" class="row">
                         <div class="col-sm-4" *ngFor="let item of categoryTypes">
                             <label class="radio-inline">
-                                <input id="tipo" type="radio"  [value]="item.valor" formControlName="tipo"
-                                    name="tipo" />{{item.desc}}
+                                <input id="tipo" type="radio" name="tipo" [value]="item.valor" formControlName="tipo"
+                                    name="tipo"  [ngClass]="{'is-invalid': submitted && hasError('tipo')}"  />{{item.desc}}
+                                    <div class="invalid-feedback">Campo Obrigatório</div>
                             </label>
                         </div>
                     </div>
                 </div>
                 <div class="col-md-4 mb-3">
                     <label>Cor Despesa/Receita</label>
-                    <input type="color" name="cor" formControlName="cor" />
+                    <input type="color" name="cor" formControlName="cor" [ngClass]="{'is-invalid': submitted && hasError('cor')}" />
+                    <div class="invalid-feedback">Campo Obrigatório</div>
                 </div>
             </form>
             <div>
                 <div class="col-md-4 mb-3 div-actions">
-                    <button (click)="onSubmit()" type="submit" *ngIf="form.value" data-toggle="modal"  data-target="#exampleModalLong" class="btn btn-success btn-actions">Salvar</button>
+                    <button (click)="onSubmit()" type="submit"   class="btn btn-success btn-actions">Salvar</button>
                     <button type="button" [routerLink]="['/categories']" class="btn btn-outline-dark">Cancelar</button>
                 </div>
             </div>

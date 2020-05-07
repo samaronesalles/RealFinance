@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { CategoryService } from '../category.service'
 import { Location } from '@angular/common';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Category } from '../category/category.model';
 import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
 import { pipe } from 'rxjs';
@@ -20,7 +20,7 @@ export class CategoryFormComponent implements OnInit {
 
 
 
-  constructor(private fb: FormBuilder, private service: CategoryService, private location: Location, private route: ActivatedRoute) { }
+  constructor(private fb: FormBuilder, private service: CategoryService, private location: Location, private route: ActivatedRoute,  private router: Router) { }
 
   
   form: FormGroup;
@@ -46,26 +46,26 @@ export class CategoryFormComponent implements OnInit {
 
 
 
-  onSubmit() {
+ async onSubmit() {
     this.submitted = true;
     if (this.form.valid) {
 
-      let msgSucess = 'Categoria criada com sucesso'
-      let msgError = 'Erro ao cadastrar nova categoria, favor realizar novamente!'
+      // let msgSucess = 'Categoria criada com sucesso'
       
-      if(this.form.value.id){
-        msgSucess='Sua categoria foi alterada com sucesso!'
-        msgError=' Erro ao atualizar categoria, tente novamente.';
+      // if(this.form.value.id){
+      //   msgSucess='Sua categoria foi alterada com sucesso!'
+      // }
+
+      try {
+        const response = await this.service.save(this.form.value);
+        this.router.navigate(['/categories']);
+      } catch (err) {
+        this.messageReturn = err.response.data.error;
       }
-      
-         this.service.save(this.form.value).then( 
-         sucess => {this.messageReturn = msgSucess}, 
-         error => { this.messageReturn = error})
     }
   }
 
   onCancel() {
-    console.log("passei por aqui")
     this.submitted = false;
     this.form.reset();
   }

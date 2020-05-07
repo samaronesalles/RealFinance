@@ -40,10 +40,10 @@ export class ExpenseFormComponent implements OnInit {
     }
     // Transforma a data para o formato que o backend espera receber
     var date = entry.data_vencimento.split('-');
-    entry.data_vencimento = `${date[1]}/${date[2]}/${date[0]}`;
+    entry.data_vencimento = `${date[2]}/${date[1]}/${date[0]}`;
     try {
       await this.entryService.createEntry(entry);
-      this.router.navigate(['/nova_pagina']);
+      this.router.navigate(['/extracts']); 
     } catch (err) {
       this.errorMessage = err.response.data.error;
     }

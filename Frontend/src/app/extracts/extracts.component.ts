@@ -9,7 +9,7 @@ import {ExtractsService} from './exctracts.service'
 export class ExtractsComponent implements OnInit {
  
   extracts: Extract[] //List extracts
-
+  messageError = undefined;
   constructor(private extractsService: ExtractsService) { }
 
 
@@ -20,14 +20,15 @@ export class ExtractsComponent implements OnInit {
 
 async loadExtracts(){
   try{
-    this.extractsService.listExtracts().then(extracts => this.extracts = extracts);
-  }catch{ }
+   const response = await this.extractsService.listExtracts().then(extracts => this.extracts = extracts);
+  }catch(err){ 
+    this.messageError = err.response.data.error;
+  }
 }
 
 
 onFilter(filter){
   console.log(filter.value);
-  console.log('VALOR');
 }
 
 

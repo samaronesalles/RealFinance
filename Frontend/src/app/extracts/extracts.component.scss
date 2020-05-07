@@ -3,7 +3,9 @@
     color:grey;
 }
 
-
+.msg-error{
+    color:red;
+}
 .head-page{
     width: 100%;
     height: 60px;
@@ -11,7 +13,7 @@
 
 body{
     width: 100%;
-    height: 600px;
+    height: 1250px;
     background-color: whitesmoke;
 }
 
@@ -54,6 +56,9 @@ body .corpo_page{
     height: 500px;
 }
 
+
+
+// Tabela
 table {
     width: 90%;
     text-align: center;
@@ -62,8 +67,6 @@ table {
     margin-top: -8px;   
 }
 
-
-// altura das linhas
 table tr{
     height: 50px;
 }
@@ -152,11 +155,12 @@ tbody tr{
 }
 
 .cad-expense{
-    background-color:teal;
+    
+    background-color: indigo;
 }
 
 .cad-recipe{
-    background-color: indigo;
+    background-color:teal;
 }
 
 
