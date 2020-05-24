@@ -175,7 +175,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n\t\"email\" : \"samaronesalles@gmail.com\",\n\t\"senha\" : \"123\"\n}",
+							"raw": "{\n\t\"email\" : \"samaronesalles@gmail.com\",\n\t\"senha\" : \"123456\"\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -401,15 +401,12 @@
 				},
 				{
 					"name": "Retornar todas",
-					"protocolProfileBehavior": {
-						"disableBodyPruning": true
-					},
 					"request": {
-						"method": "GET",
+						"method": "POST",
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n\t\"categoria_id\" : 9,\r\n\t\"vencimento_de\" : \"01/05/2020\",\r\n\t\"vencimento_ate\" : \"15/05/2020\"\r\n}",
+							"raw": "{\r\n\t\"categoria_id\" : 9,\r\n\t\"vencimento_de\" : \"01/05/2020\",\r\n\t\"vencimento_ate\" : \"31/07/2020\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -425,6 +422,35 @@
 							"path": [
 								"api",
 								"lancamentos"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Atualizar",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"categoria_id\" : 9,\n\t\"descricao\" : \"Ref. a teste de alteracao\",\n\t\"valor\" : 360.40,\n\t\"data_vencimento\" : \"15/07/2020\",\n\t\"ja_pago\" : true,\n\t\"lancamento_fixo\" : true,\n\t\"lancamento_origem\": 63\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:3000/api/lancamento/-1",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"lancamento",
+								"-1"
 							]
 						}
 					},

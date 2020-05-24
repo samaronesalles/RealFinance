@@ -63,6 +63,19 @@ module.exports = {
             let ultimoDia = moment().endOf('month').format("YYYY-MM-DD");
 
             if (((vencimento_de) && (vencimento_ate)) && ((vencimento_de.length == 10) && (vencimento_ate.length == 10))) {
+
+                if (!moment(vencimento_de, 'DD/MM/YYYY').isValid()) {
+                    throw new Error('A data inicial do filtro é inválida');
+                }
+
+                if (!moment(vencimento_ate, 'DD/MM/YYYY').isValid()) {
+                    throw new Error('A data final do filtro é inválida');
+                }
+
+                if (moment(vencimento_de, 'DD/MM/YYYY').isAfter(moment(vencimento_ate, 'DD/MM/YYYY'))) {
+                    throw new Error('A data final do período do filtro é superior à data inicial.');
+                }
+
                 primeiroDia = moment(vencimento_de, 'DD/MM/YYYY').format("YYYY-MM-DD");
                 ultimoDia = moment(vencimento_ate, 'DD/MM/YYYY').format("YYYY-MM-DD");
             };
