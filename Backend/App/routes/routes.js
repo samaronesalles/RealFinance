@@ -27,6 +27,6 @@ routes.get('/catsTotLcto/:id', auth.isLogged, CatController.TotalLancadoCategori
 
 // Lançamentos
 routes.post('/novoLcto', auth.isLogged, lctoController.novoLancamento);                                       // Testado: OK
-routes.get('/lancamentos', auth.isLogged, lctoController.lancamentosFinanceiros);                             // Testado: OK
+routes.post('/lancamentos', auth.isLogged, lctoController.lancamentosFinanceiros);                             // Testado: OK
 
 module.exports = routes;
