@@ -172,4 +172,95 @@ module.exports = {
         }
     },
 
+
+    async atualizarLancamento(req, res) {
+        console.log('chegou em "Controllers>LctosController.atualizarLancamento"');
+
+        try {
+            const { id } = req.params;
+            const { lancamento_fixo, ja_pago, lancamento_origem } = req.body;
+            let lctoJaEraFixo = false;
+            let Lcto = undefined;
+
+            if (!id) {
+                throw new Error('É obrigatório informar o id do lancamento');
+            }
+
+            if (ja_pago === undefined) {
+                throw new Error('É obrigatório informar "ja_pago" do lancamento');
+            }
+
+            UtilsLancamento.CamposObrigatorios(req, res);
+
+            const novoLancto = id < 0;
+
+            if (!novoLancto) {
+                Lcto = await Lancamento.findByPk(id);
+
+                if (!Lcto) {
+                    throw new Error(`Lancamento id '${id}' não encontrada no cadastro.`);
+                }
+
+                lctoJaEraFixo = Lcto.lancamento_fixo
+            } else {
+                if (lancamento_origem <= 0) {
+                    throw new Error(`O id do lancamento de origem é obrigatório.`);
+                } else {
+                    Lcto = await Lancamento.findByPk(lancamento_origem);
+
+                    if (!Lcto) {
+                        throw new Error(`Lancamento id '${id}' não encontrada no cadastro.`);
+                    }
+
+                    lctoJaEraFixo = Lcto.lancamento_fixo
+                }
+            }
+
+            req.body['usuarios_id'] = req.session.user.id;
+            req.body['data_vencimento'] = moment(req.body['data_vencimento'], 'DD/MM/YYYY').format("YYYY-MM-DD");
+
+            if (!ja_pago) {
+                delete req.body['data_pagamento'];
+            } else {
+                if (novoLancto) {
+                    req.body['data_pagamento'] = moment().format("YYYY-MM-DD");
+                }
+            }
+
+            if (novoLancto) {
+                Lcto = await Lancamento.create(req.body);
+            } else {
+
+                await Lcto.update(req.body, {
+                    where: {
+                        id: id
+                    },
+                    returning: true,
+                    plain: true
+                });
+
+
+                if ((lctoJaEraFixo) && (!lancamento_fixo)) {
+                    await LancamentoFixo.destroy({
+                        where: {
+                            lancamento_id: Lcto.id
+                        }
+                    });
+                }
+
+
+                if ((!lctoJaEraFixo) && (lancamento_fixo)) {
+                    LctoFixo = await LancamentoFixo.create({ lancamento_id: Lcto.id })
+                }
+
+            }
+
+
+            return res.status(200).json(Lcto);
+
+        } catch (error) {
+            return res.status(400).json({ error: error.message });
+        }
+    },
+
 };
