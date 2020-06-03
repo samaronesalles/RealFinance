@@ -17,17 +17,18 @@ routes.delete('/user', userController.deleteUsuario);                           
 routes.get('/auth', auth.isLogged, userController.auth);
 
 // Categorias
-routes.post('/cats', auth.isLogged, CatController.novaCategoria);                                             // Testado: OK
-routes.get('/cats', auth.isLogged, CatController.listaCategorias);                                            // Testado: OK
-routes.get('/cats/:id', auth.isLogged, CatController.dadosCategoria);                                         // Testado: OK
-routes.get('/catsComLctos/:id', auth.isLogged, CatController.dadosCategoriaComLctos);                         // Testado: OK
-routes.delete('/cats/:id', auth.isLogged, CatController.deleteCategoria);                                     // Testado: OK
-routes.put('/cats/:id', auth.isLogged, CatController.atualizarCategoria);                                     // Testado: OK
-routes.get('/catsTotLcto/:id', auth.isLogged, CatController.TotalLancadoCategoria);                           // Testado: OK
+routes.post('/cats', auth.isLogged, CatController.novaCategoria);                              // Testado: OK
+routes.get('/cats', auth.isLogged, CatController.listaCategorias);                             // Testado: OK
+routes.get('/cats/:id', auth.isLogged, CatController.dadosCategoria);                          // Testado: OK
+routes.get('/catsComLctos/:id', auth.isLogged, CatController.dadosCategoriaComLctos);          // Testado: OK
+routes.delete('/cats/:id', auth.isLogged, CatController.deleteCategoria);                      // Testado: OK
+routes.put('/cats/:id', auth.isLogged, CatController.atualizarCategoria);                      // Testado: OK
+routes.get('/catsTotLcto/:id', auth.isLogged, CatController.TotalLancadoCategoria);            // Testado: OK
 
 // Lançamentos
-routes.post('/novoLcto', auth.isLogged, lctoController.novoLancamento);                                       // Testado: OK
-routes.post('/lancamentos', auth.isLogged, lctoController.lancamentosFinanceiros);                             // Testado: OK
-routes.put('/lancamento/:id', auth.isLogged, lctoController.atualizarLancamento);                             // Testado: OK
+routes.post('/novoLcto', auth.isLogged, lctoController.novoLancamento);                        // Testado: OK
+routes.post('/lancamentos', auth.isLogged, lctoController.lancamentosFinanceiros);             // Testado: OK
+routes.put('/lancamento/:id', auth.isLogged, lctoController.atualizarLancamento);              // Testado: OK
+routes.post('/totaisNoPeriodo', auth.isLogged, lctoController.totaisNoPeriodo);                // Testado: OK
 
 module.exports = routes;

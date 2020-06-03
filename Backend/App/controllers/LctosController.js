@@ -1,4 +1,4 @@
-const { Op } = require("sequelize");
+const { Op, Sequelize } = require("sequelize");
 const moment = require('moment');
 
 const Lancamento = require('../models/LctosModel');
@@ -172,7 +172,6 @@ module.exports = {
         }
     },
 
-
     async atualizarLancamento(req, res) {
         console.log('chegou em "Controllers>LctosController.atualizarLancamento"');
 
@@ -257,6 +256,82 @@ module.exports = {
 
 
             return res.status(200).json(Lcto);
+
+        } catch (error) {
+            return res.status(400).json({ error: error.message });
+        }
+    },
+
+    async totaisNoPeriodo(req, res) {
+        console.log('chegou em "Controllers>LctosController.totaisNoPeriodo"');
+
+        try {
+            const { mes } = req.body;
+
+            if ((mes < 1) && (mes > 12)) {
+                throw new Error('O mês selecionado é inválido.');
+            }
+
+            const ano = moment().format("YYYY");
+
+            let data_de = moment(ano + '-' + mes + '-' + '01').startOf('month').format("YYYY-MM-DD");
+            let data_ate = moment(data_de).endOf('month').format("YYYY-MM-DD");
+
+            // Montando filtro...
+            let condicaoWhere = {
+                usuarios_id: req.session.user.id,
+            }
+
+            const data_pagamento = { [Op.between]: [data_de, data_ate] };
+            condicaoWhere["data_pagamento"] = data_pagamento;
+
+            const totalReceitas = await Lancamento.findAll({
+                attributes: [[Sequelize.fn('sum', Sequelize.col('valor')), 'totalReceita']],
+                include: [
+                    {
+                        attributes: [],
+                        model: Categoria, as: 'categoria',
+                        where: { receita_ou_despesa: Utils.RecDespToInt('R') }
+                    },
+                ],
+                where: condicaoWhere,
+            });
+
+            const totalDespesas = await Lancamento.findAll({
+                attributes: [[Sequelize.fn('sum', Sequelize.col('valor')), 'totalDespesa']],
+                include: [
+                    {
+                        attributes: [],
+                        model: Categoria, as: 'categoria',
+                        where: { receita_ou_despesa: Utils.RecDespToInt('D') }
+                    },
+                ],
+                where: condicaoWhere,
+            });
+
+            let receitas = 0.0;
+            try {
+                if (totalReceitas[0].dataValues.totalReceita > 0.0)
+                    receitas = totalReceitas[0].dataValues.totalReceita;
+            } catch ({ }) {
+                receitas = 0.0;
+            }
+
+
+            let despesas = 0.0;
+            try {
+                if (totalDespesas[0].dataValues.totalDespesa > 0.0)
+                    despesas = totalDespesas[0].dataValues.totalDespesa;
+            } catch ({ }) {
+                despesas = 0.0;
+            }
+
+
+            return res.status(200).json({
+                total_Receitas: receitas,
+                total_Despesa: despesas,
+                saldo_Geral: receitas - despesas,
+            });
 
         } catch (error) {
             return res.status(400).json({ error: error.message });
