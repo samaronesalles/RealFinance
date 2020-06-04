@@ -44,7 +44,7 @@ module.exports = {
     },
 
     async lancamentosFinanceiros(req, res) {                                   // Testado: OK
-        console.log('chegou em "Controllers>LctosController.novoLancamento"');
+        console.log('chegou em "Controllers>LctosController.lancamentosFinanceiros"');
 
         try {
             const { categoria_id, vencimento_de, vencimento_ate } = req.body;
@@ -128,11 +128,31 @@ module.exports = {
                 ],
             });
 
+            // const lactosGambiarra = await Lancamento.findAll({
+            //     attributes: ['id', ['data_vencimento', 'vencimento'], 'descricao', 'valor', 'ja_pago'],
+            //     include: [
+            //         {
+            //             model: Categoria, as: 'categoria',
+            //             attributes: [['id', 'categoria_id'], ['nome', 'categoria_desc'], 'cor', 'receita_ou_despesa'],
+            //         },
+            //         {
+            //             model: LancamentoFixo, as: 'LancamentoFixo',
+            //             attributes: [],
+            //             lancamento_id: null,
+            //             required: false,
+            //         }
+            //     ],
+            //     where: {
+            //         lancamento_fixo: 1,
+            //         '$LancamentoFixo.lancamento_id$': null,
+            //     },
+            // });
+
             if (lancamentosFixos) {
                 lancamentosFixos.map((item) => {
                     const i = item.Lancamento.categoria.dataValues["receita_ou_despesa"];
                     item.Lancamento.categoria.dataValues["receita_ou_despesa_desc"] = Utils.IntToRecDesp(i);
-                    item.Lancamento.dataValues["lancamento_origem"] = item.dataValues.Lancamento.id;
+                    item.Lancamento.dataValues["lancamento_origem"] = item.Lancamento.id;
 
                     let dataDoItem = moment(item.Lancamento.dataValues["vencimento"]).format("YYYY-MM-DD");
                     let inicio = moment(dataDoItem);
@@ -141,7 +161,19 @@ module.exports = {
                     while (inicio <= fim) {
                         dataDoItem = moment(moment(dataDoItem).set('month', moment(inicio).month())).format("YYYY-MM-DD");
 
-                        const pos = resultado.findIndex((atual) => ((atual.id === item.Lancamento.dataValues.id) && (atual.vencimento === dataDoItem)));
+                        //const pos = resultado.findIndex((atual) => ((atual.id === item.Lancamento.dataValues.id) && (atual.vencimento === dataDoItem)));
+                        const pos = resultado.findIndex(
+                            (atual) => (
+                                ((atual.id === item.Lancamento.dataValues.id) && (atual.vencimento === dataDoItem))
+                                ||
+                                (
+                                    (atual.vencimento === dataDoItem) &&
+                                    (atual.descricao === item.Lancamento.descricao) &&
+                                    (atual.valor === item.Lancamento.valor) &&
+                                    (atual.categoria.categoria_id === item.Lancamento.categoria.categoria_id)
+                                )
+                            )
+                        );
 
                         if (pos < 0) {
                             let itemTemp = Object.assign({}, item.Lancamento.dataValues);
@@ -164,6 +196,7 @@ module.exports = {
 
                 });
             }
+
 
             return res.status(200).json(resultado);
 

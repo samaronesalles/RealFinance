@@ -26,8 +26,14 @@ function novaPosicao_OrderVencimento_Desc(lctos, novaData) {
 
         const dataItem = moment(lctos[i].vencimento);
 
-        if (dataItem >= novaData)
-            return i;
+        if (dataItem >= novaData) {
+            if (i == lctos.length - 1)
+                return lctos.length - 1;
+            else
+                return i + 1;
+        }
+
+
     }
 
     return 0;  // Significa que a "novaData" é maior que todas, então adiciona no topo da lista.
