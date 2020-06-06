@@ -14,15 +14,14 @@ module.exports = {
         console.log('chegou em "Controllers>LctosController.novoLancamento"');
 
         try {
-            const { lancamento_fixo, data_pagamento } = req.body;
+            const { lancamento_fixo, data_pagamento, ja_pago } = req.body;
 
             UtilsLancamento.CamposObrigatorios(req, res);
 
             req.body['usuarios_id'] = req.session.user.id;
             req.body['data_vencimento'] = moment(req.body['data_vencimento'], 'DD/MM/YYYY').format("YYYY-MM-DD");
 
-            if ((data_pagamento) && (data_pagamento.length == 10)) {
-                req.body['ja_pago'] = true;
+            if (ja_pago) {
                 req.body['data_pagamento'] = moment(req.body['data_pagamento'], 'DD/MM/YYYY').format("YYYY-MM-DD");
             } else {
                 req.body['ja_pago'] = false;
