@@ -22,7 +22,7 @@ module.exports = {
             req.body['data_vencimento'] = moment(req.body['data_vencimento'], 'DD/MM/YYYY').format("YYYY-MM-DD");
 
             if (ja_pago) {
-                req.body['data_pagamento'] = moment(req.body['data_pagamento'], 'DD/MM/YYYY').format("YYYY-MM-DD");
+                req.body['data_pagamento'] = moment().format("YYYY-MM-DD");
             } else {
                 req.body['ja_pago'] = false;
                 delete req.body['data_pagamento'];
