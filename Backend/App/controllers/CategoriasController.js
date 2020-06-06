@@ -1,3 +1,5 @@
+const moment = require('moment');
+const { Op, Sequelize } = require("sequelize");
 const sequelize = require('sequelize');
 const CheckCat = require('./validacoes/categorias');
 const Categoria = require('../models/CategoriasModel');
@@ -66,6 +68,18 @@ module.exports = {
         console.log('chegou em "Controllers>CategoriasController.listaCategorias"');
 
         try {
+
+            const ano = moment().format("YYYY");
+
+            let data_de = moment().startOf('month').format("YYYY-MM-DD");
+            let data_ate = moment(data_de).endOf('month').format("YYYY-MM-DD");
+
+            let condicaoWhere = {};
+
+            const data_pagamento = { [Op.between]: [data_de, data_ate] };
+            condicaoWhere["data_pagamento"] = data_pagamento;
+
+
             let categorias = await Categoria.findAll({
                 where: {
                     usuario_id: req.session.user.id
@@ -78,7 +92,9 @@ module.exports = {
                     },
                     {
                         model: Lancamento,
-                        attributes: [[sequelize.fn('sum', sequelize.col('valor')), 'Total_Lctos']]
+                        attributes: [[sequelize.fn('sum', sequelize.col('valor')), 'Total_Lctos']],
+                        where: condicaoWhere,
+                        required: false,
                     }
                 ],
                 group: atributos_Contegorias,
