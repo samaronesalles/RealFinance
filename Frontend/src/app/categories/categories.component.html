@@ -1,8 +1,9 @@
 <body class="page-categories">
-
     <div class="header"></div>
     <div class="page">
-      
+        <div class="info-month center">
+            <div class="month center"><i class="material-icons color">today</i>{{monthNow}}</div>
+        </div>
         <div class="tp">
             <h5> Dashboard</h5>
             <hr>
@@ -10,8 +11,8 @@
         <div class="container-page">
             <div class="panel">
                 <div class="panel-item">
-                    <div class="panel-item-op">Despesas</div>
-                    <div class="panel-item-op">R$ 25,0</div>
+                    <div class="panel-item-op">Despesas Pagas</div>
+                    <div class="panel-item-op" *ngIf="totalizer">{{totalizer.total_Despesa |currency: 'BRL': true}}</div>
                 </div>
                 <div class="panel-item-icon">
                     <i class="material-icons md-48 style-recipe">thumb_down_alt</i>
@@ -20,10 +21,19 @@
             <div class="panel">
                 <div class="panel-item ">
                     <div class="panel-item-op">Receitas</div>
-                    <div class="panel-item-op"><i class="material-icons color">monetization_on</i> 32,00</div>
+                    <div class="panel-item-op" *ngIf="totalizer">{{totalizer.total_Receitas|currency: 'BRL': true}}</div>
                 </div>
                 <div class="panel-item-icon">
                     <i class="material-icons md-48 style-expense">thumb_up_alt</i>
+                </div>
+            </div>
+            <div class="panel">
+                <div class="panel-item ">
+                    <div class="panel-item-op">Saldo Corrente</div>
+                    <div class="panel-item-op" *ngIf="totalizer">{{totalizer.saldo_Geral|currency: 'BRL': true}}</div>
+                </div>
+                <div class="panel-item-icon">
+                    <img src="assets/img/moneyBag.png" width="50px" height="50px" />
                 </div>
             </div>
         </div>

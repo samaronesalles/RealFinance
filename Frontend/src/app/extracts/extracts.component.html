@@ -1,43 +1,50 @@
 <head>
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 </head>
+
 <body>
     <div class="head-page"></div>
 
     <div class="corpo_page">
         <div class="title-page centerr">
             <h4>Lançamentos</h4>
-        </div> 
+        </div>
         <div class="msg-error">{{messageError}}</div>
         <div class="releases-page">
-            <!-- <div class="style-filter ">
-                <form #form="ngForm" novalidate> 
-                        <div class="col-m2" >
-                            <label  for="dataInicio">Data Inicio</label>
-                            <input name="dataInicio" type="date">
+            <div *ngIf="!idCategory" class="style-filter">
+                <form #form="ngForm" novalidate>
+                    <div class="row">
+                        <div class="col col-md-3">
+                            <label for="dataInicio">Data Inicio</label>
+                            <input id="start-date" type="date" class="form-control" ngModel name="vencimento_de">
                         </div>
-                
-                        <div class="col-m2">
-                            <label   for="dataFim">Data Fim</label>
-                            <input name="dataFim" type="date">
+                        <div class="col col-md-3">
+                            <label for="dataFim">Data Fim</label>
+                            <input type="date" ngModel name="vencimento_ate" class="form-control">
                         </div>
-
-                        <div class="col-m2">
-                            <label for="idCategoria">Categoria</label>
-                            <input name="idCategoria" required type="text">
+                        <div class="col col-md-3">
+                            <label for="categoria_id">Categoria</label>
+                            <select name="categoria_id" required ngModel class="form-control">
+                                <option *ngFor="let item of categories" [value]="item.id">
+                                    {{item.nome}}
+                                </option>
+                            </select>
                         </div>
                         <div class="col-m2 centerr">
-                            <button  (click)="onFilter(form.value)" type="submit"  class="btn-filter">Filtrar</button>
+                            <button (click)="onFilter(form.value)" type="submit" class="btn-filter">Filtrar</button>
                         </div>
-                    </form>
-            </div> -->
-            <div class="actions">   
-                <button class="cad-recipe centerc" [routerLink]="['/entry-revenue']" ><i class="material-icons cl-white">add</i>Receita</button> 
-                <button class="cad-expense centerc" [routerLink]="['/entry-expense']" ><i class="material-icons cl-white">add</i>Despesa</button>
-            </div> 
+                    </div>
+                </form>
+            </div>
+            <div class="actions">
+                <button class="cad-recipe centerc" [routerLink]="['/entry-revenue']"><i
+                        class="material-icons cl-white">add</i>Receita</button>
+                <button class="cad-expense centerc" [routerLink]="['/entry-expense']"><i
+                        class="material-icons cl-white">add</i>Despesa</button>
+            </div>
             <div class="centerr">
-                <table id="table-extracts" class="display nowrap">
-                    <thead> 
+                <table *ngIf="extracts?.length>0" id="table-extracts" class="display nowrap">
+                    <thead>
                         <tr>
                             <th colspan="2">Categoria</th>
                             <th>Data</th>
@@ -47,33 +54,57 @@
                             <th>Açoes</th>
                         </tr>
                     </thead>
-                    <tbody> 
+                    <tbody>
                         <tr *ngFor="let extract of extracts">
-                            <td> <i class="material-icons" [style.color]="extract.categoria.cor" title="{{extract.categoria.categoria_desc}}" > bookmark</i></td>
+                            <td> <i class="material-icons" [style.color]="extract.categoria.cor"
+                                    title="{{extract.categoria.categoria_desc}}"> bookmark</i></td>
                             <td class="centerc">
-                                <div [ngClass]="{'style-expense': extract.categoria.receita_ou_despesa_desc =='Despesa','style-recipe': extract.categoria.receita_ou_despesa_desc == 'Receita'}">{{extract.categoria.receita_ou_despesa_desc}}</div>
+                                <div
+                                    [ngClass]="{'style-expense': extract.categoria.receita_ou_despesa_desc =='Despesa','style-recipe': extract.categoria.receita_ou_despesa_desc == 'Receita'}">
+                                    {{extract.categoria.receita_ou_despesa_desc}}</div>
                             </td>
                             <td>{{extract.vencimento | date: 'dd/MM/yyyy'}}</td>
                             <td class="centerr">{{extract.descricao}}</td>
-                            <td><div  class="centerc color">{{extract.valor| currency: 'BRL': true}}</div></td>
-                            <td class="tr-status centerc"> 
+                            <td>
+                                <div class="centerc color">{{extract.valor| currency: 'BRL': true}}</div>
+                            </td>
+                            <td class="tr-status centerc">
                                 <div *ngIf="extract.ja_pago" class="lbl-status status-paid-out centerc">PAGO</div>
                                 <div *ngIf="!extract.ja_pago" class="lbl-status centerc status-pending">PENDENTE</div>
                             </td>
-                            <td>    
-                                <div class="action">   
-                                    <a href="./"></a> 
-                                    <img src="assets/img/menus.jpg"  width="10" >
+                            <td>
+                                <div class="action">
+                                    <a href="./"></a>
+                                    <img src="assets/img/menus.jpg" width="10">
                                     <div class="submenu">
-                                        <a href="./"> <div class="submenuitem"><i class="material-icons md-18">create</i>Editar</div></a>
-                                        <a href="./"> <div class="submenuitem"><i class="material-icons md-18">delete</i>Excluir</div> </a>
+                                        <a href="./">
+                                            <div class="submenuitem"><i class="material-icons md-18">create</i>Editar
+                                            </div>
+                                        </a>
+                                        <a href="./">
+                                            <div class="submenuitem"><i class="material-icons md-18">delete</i>Excluir
+                                            </div>
+                                        </a>
                                     </div>
                                 </div>
                             </td>
                         </tr>
                     </tbody>
                 </table>
-            </div>
+                <div *ngIf="extracts?.length <=0" class="msgInfo centerc">
+                    <div style="width: 40%;">
+                        <h5>Não encontramos lançamentos correspondentes!</h5>
+                    </div>
+                    <div >
+                        <span class="material-icons m-50"> sentiment_very_dissatisfied </span> 
+                    </div>
+                </div>   
+            </div>         
         </div>
     </div>
+
+    
+
 </body>
+
+

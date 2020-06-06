@@ -27,6 +27,7 @@ export class CategoryResolverGuard implements Resolve<Category> {
         cor: null,
         receita_ou_despesa: null,
         receita_ou_despesa_desc: null,
+        total_lancamentos: null,
        
       });
     }

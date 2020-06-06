@@ -35,4 +35,8 @@ export class CategoryComponent implements OnInit {
     this.router.navigate(['editar',id]);
   }
 
+  async extractsCategory(id: number){
+    this.router.navigate(['/extracts',id]);
+  }
+  
 }

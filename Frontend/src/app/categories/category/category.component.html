@@ -7,14 +7,16 @@
           <div [ngClass]="{'style-expense': category.receita_ou_despesa_desc =='Despesa','style-recipe': category.receita_ou_despesa_desc == 'Receita'}">{{category.receita_ou_despesa_desc}}</div>
         </td>
         <td  class="fl">{{category.nome}}</td> 
-        <td class="md-val">R$ 15,00</td> 
+        <td class="md-val" class="color-read" *ngIf="category.receita_ou_despesa_desc =='Despesa'"> {{category.total_lancamentos|currency: 'BRL': true}}</td> 
+        <td class="md-val" class="color-green" *ngIf="category.receita_ou_despesa_desc =='Receita'" > {{category.total_lancamentos| currency: 'BRL': true}}</td>
+        
+        <td><a class="item" (click)="extractsCategory(category.id)" ><i class="material-icons md-18">description</i></a></td> 
         <td><a class="item" (click) ="onEdit(category.id)"><i class="material-icons md-18">create</i></a></td>
         <td><a class="item" (click)="delete(category.id)"><i class="material-icons md-18">delete</i></a></td> 
       </tr>
-   
     </tbody>
   </table>
-
+  <div class="msgInfo"></div>
 
 
 

@@ -25,8 +25,7 @@ import { of } from 'rxjs';
         
       ]
     }
-
-
+    
     async  listCategories(){
       const response = await API.get('/cats');
       return response.data;
@@ -60,8 +59,15 @@ import { of } from 'rxjs';
         return this.udpate(category);
       }
       return this.createNewCategory(category);
-      
     }
+
+    async totalizerAllCategories(month){
+      const response = await API.post('/totaisNoPeriodo/',{mes:month});
+      return response.data;
+    }
+
+    
+
 
   }
 

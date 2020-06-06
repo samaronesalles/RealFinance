@@ -21,7 +21,8 @@ const routes: Routes = [
   { path: 'editar/:id', component: CategoryFormComponent, resolve: { category: CategoryResolverGuard } },
   { path: 'entry-expense', component: ExpenseFormComponent },
   { path: 'entry-revenue', component: RevenueFormComponent },
-  { path: 'extracts', component: ExtractsComponent}
+  { path: 'extracts', component: ExtractsComponent},
+  { path: 'extracts/:id', component: ExtractsComponent  }
 ];
 
 @NgModule({

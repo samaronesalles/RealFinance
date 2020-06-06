@@ -1,13 +1,13 @@
 
 .header{
     width: 100%;
-    height: 80px;
+    height: 50px; //80px
+    background-color: green;
 }
 .page-categories{
     width: 100%;
     height: 900px;
-   background-color: whitesmoke;
-    
+    background-color: whitesmoke;
 }
 
 .page{
@@ -153,7 +153,24 @@
     align-items: center;
 }
 
+.info-month{
+    width: 100%;
+    height:80px;
+    overflow:hidden;
+    font-family: 'Quicksand', sans-serif;
+}
 
-
-
+.month{
+    background-color: white;
+    border-radius: 12px;
+    box-shadow: 2px 2px 0 #c4c4c4;
+    color: grey;
+    width: 20%;
+    height: 40px;
+    margin:10px 0 0 -10px;  
+    background: white;
+    -moz-border-radius: 40px / 30px;
+    -webkit-border-radius: 40px / 30px;
+    border-radius: 40px / 30px;
+}
 

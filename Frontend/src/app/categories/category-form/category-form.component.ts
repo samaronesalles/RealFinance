@@ -49,13 +49,6 @@ export class CategoryFormComponent implements OnInit {
  async onSubmit() {
     this.submitted = true;
     if (this.form.valid) {
-
-      // let msgSucess = 'Categoria criada com sucesso'
-      
-      // if(this.form.value.id){
-      //   msgSucess='Sua categoria foi alterada com sucesso!'
-      // }
-
       try {
         const response = await this.service.save(this.form.value);
         this.router.navigate(['/categories']);
