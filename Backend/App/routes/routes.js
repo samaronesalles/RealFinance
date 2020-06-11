@@ -30,5 +30,6 @@ routes.post('/novoLcto', auth.isLogged, lctoController.novoLancamento);         
 routes.post('/lancamentos', auth.isLogged, lctoController.lancamentosFinanceiros);             // Testado: OK
 routes.put('/lancamento/:id', auth.isLogged, lctoController.atualizarLancamento);              // Testado: OK
 routes.post('/totaisNoPeriodo', auth.isLogged, lctoController.totaisNoPeriodo);                // Testado: OK
+routes.get('/lancamento/:id', auth.isLogged, lctoController.lancamento);                       // Testado: OK
 
 module.exports = routes;

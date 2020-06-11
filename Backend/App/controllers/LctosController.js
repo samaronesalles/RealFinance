@@ -370,4 +370,48 @@ module.exports = {
         }
     },
 
+    async lancamento(req, res) {
+        console.log('chegou em "Controllers>LctosController.lancamento"');
+
+        try {
+
+            const { id } = req.params;
+
+            if (!id) {
+                throw new Error('É obrigatório informar o id do lancamento');
+            }
+
+            // Pesquisando lançamentos...
+            const lancamento = await Lancamento.findByPk(id, {
+                where: {
+                    usuarios_id: req.session.user.id,
+                },
+                attributes: ['id', ['data_vencimento', 'vencimento'], 'descricao', 'valor', 'ja_pago'],
+                include: [
+                    {
+                        model: Categoria, as: 'categoria',
+                        attributes: [['id', 'categoria_id'], ['nome', 'categoria_desc'], 'cor', 'receita_ou_despesa'],
+                    },
+                ],
+                order: [
+                    ['data_vencimento', 'desc']
+                ],
+            });
+
+            if (!lancamento) {
+                throw new Error(`Lancamento id '${id}' não encontrada para este usuário.`);
+            } else {
+                const i = lancamento.categoria.dataValues["receita_ou_despesa"];
+                lancamento.categoria.dataValues["receita_ou_despesa_desc"] = Utils.IntToRecDesp(i);
+                lancamento.dataValues["lancamento_origem"] = -1;
+            }
+
+            return res.status(200).json(lancamento);
+
+        } catch (error) {
+            return res.status(400).json({ error: error.message });
+        }
+
+    },
+
 };
