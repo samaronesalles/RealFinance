@@ -84,6 +84,7 @@ export class RevenueFormComponent implements OnInit {
     if (this.idExpense == '-1') {
       return this.checkisGost(entry);
     }
+    entry.ja_pago = true;
     if (!entry.lancamento_fixo) {
       entry.lancamento_fixo = false;
     }
