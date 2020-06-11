@@ -13,4 +13,9 @@ export class EntryService {
     return response.data;
   }
 
+  async updateEntry(expense, id) {
+    const response = await API.put('/lancamento/' + id, expense);
+    return response.data;
+  }
+
 }

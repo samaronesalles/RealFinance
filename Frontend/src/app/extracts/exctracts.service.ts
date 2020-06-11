@@ -1,13 +1,13 @@
 import {Injectable} from '@angular/core'
 import {API} from '../app.api'
-import { async } from '@angular/core/testing';
-import { filter } from 'rxjs/operators';
 
 @Injectable({
     providedIn: 'root'
   })
 
-  export class ExtractsService{
+  export class ExtractsService {
+
+    currentExtract = undefined;
 
     constructor( ){}
 

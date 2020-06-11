@@ -21,6 +21,8 @@ const routes: Routes = [
   { path: 'editar/:id', component: CategoryFormComponent, resolve: { category: CategoryResolverGuard } },
   { path: 'entry-expense', component: ExpenseFormComponent },
   { path: 'entry-revenue', component: RevenueFormComponent },
+  { path: 'entry-expense/:id', component: ExpenseFormComponent },
+  { path: 'entry-revenue/:id', component: RevenueFormComponent },
   { path: 'extracts', component: ExtractsComponent},
   { path: 'extracts/:id', component: ExtractsComponent  }
 ];

@@ -1,30 +1,41 @@
 <section class="teste">
     <div class="container">
         <div class="container-form">
-            <form #form="ngForm" novalidate>
-                <div class="titulo-page">
+            <form [formGroup]="entryForm">
+                <div *ngIf="!isEdit" class="titulo-page">
                     <h3>Lançamento de Despesa</h3>
                     <hr>
+                </div>
+                <div *ngIf="isEdit" class="titulo-page">
+                    <h3>Edição de Lançamento</h3>
+                    <hr>
+                </div>
+                <div class="msg-erro">
+                    {{messageEditinGost}}
                 </div>
                 <div class="form-group">
                     <div class="col-md-6 mb-3">
                         <label for="descricao">Descrição</label>
-                        <input id="descricao" type="text" name="descricao" maxlength="100" required ngModel
-                            class="form-control" />
+                        <input id="descricao" type="text" name="descricao" maxlength="100" required
+                            formControlName="descricao" class="form-control" />
                     </div>
                 </div>
                 <div class="form-group">
                     <div class="col-md-3 mb-3">
                         <label for="valor">Valor</label>
                         <input currencyMask [options]="{ prefix: 'R$ ', thousands: '.', decimal: ',' }" id="valor"
-                            type="text" name="valor" required ngModel class="form-control" />
+                            type="text" name="valor" required formControlName="valor" class="form-control" />
                     </div>
                 </div>
                 <div class="form-group">
                     <div class="col-md-3 mb-3">
                         <label for="categoria_id">Categoria</label>
                         <br>
-                        <select name="categoria_id" required ngModel class="form-control">
+                        <select id="categoria_id" name="categoria_id" required formControlName="categoria_id"
+                            class="form-control">
+                            <option *ngIf="isEdit" selected disabled hidden>
+                                {{category.categoria_desc}}
+                            </option>
                             <option *ngFor="let item of expenseCategories" [value]="item.id">
                                 {{item.nome}}
                             </option>
@@ -37,20 +48,22 @@
                 <div class="form-group">
                     <div class="col-md-3 mb-3">
                         <label for="datarec">Data de vencimento</label>
-                        <input id="datarec" type="date" name="data_vencimento" required ngModel class="form-control" />
+                        <input id="datarec" type="date" name="data_vencimento" required
+                            formControlName="data_vencimento" class="form-control" />
                     </div>
                 </div>
                 <div class="form-group">
                     <div class="col-md-6 mb-3">
                         <label for="fixo">Ja foi pago? &nbsp;</label>
-                        <input id="fixo" type="checkbox" name="ja_pago" ngModel />
+                        <input id="fixo" type="checkbox" name="ja_pago" formControlName="ja_pago" />
                     </div>
                 </div>
-                <div class="form-group">
+                <div *ngIf="!isEdit" class="form-group">
                     <div class="col-md-6 mb-3">
                         <label for="fixo">Lançamento fixo? &nbsp;</label>
-                        <input id="fixo" type="checkbox" name="lancamento_fixo" ngModel />
-                        <div *ngIf="form.value.lancamento_fixo">Ao marcar essa opção o lançamento será recorrente todos os meses
+                        <input id="fixo" type="checkbox" name="lancamento_fixo" formControlName="lancamento_fixo" />
+                        <div *ngIf="entryForm.value.lancamento_fixo">Ao marcar essa opção o lançamento será recorrente
+                            todos os meses
                         </div>
                     </div>
                 </div>
@@ -58,8 +71,8 @@
                     {{errorMessage}}
                 </div>
                 <div class="col-md-4 mb-3 div-actions">
-                    <button type="submit" [disabled]="!form.valid" class="btn btn-success btn-actions"
-                        (click)="createEntry(form.value)">Salvar</button>
+                    <button type="submit" [disabled]="!entryForm.valid" class="btn btn-success btn-actions"
+                        (click)="onSubmit(entryForm.value)">Salvar</button>
                     <button type="button" [routerLink]="['/extracts']" class="btn btn-outline-dark">Cancelar</button>
                 </div>
             </form>
